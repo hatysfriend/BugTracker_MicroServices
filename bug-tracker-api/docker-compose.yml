@@ -1,0 +1,13 @@
+version: "3"
+services:
+  api:
+    image: node:latest
+    build: .
+    ports:
+      - "3002:3002"
+    links:
+      - mongo
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
