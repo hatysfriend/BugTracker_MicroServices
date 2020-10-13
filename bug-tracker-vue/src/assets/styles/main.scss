@@ -1,2 +1,8 @@
+$background-primary: #222;
+$background-secondary: #666666;
+$body-background-color: $background-primary;
+$title-color: azure;
+$family-primary: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
 @import '~bulma/bulma';
 @import './styles.scss';

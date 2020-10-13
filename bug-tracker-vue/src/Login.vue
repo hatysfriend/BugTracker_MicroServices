@@ -1,10 +1,9 @@
 <template>
-<div>
-    <img src="../src/assets/img/BugtraceLogo.gif" class="d-inline-block align-top">
-    <img id="logo" src="../src/assets/img/transparentBug.png">
+<div class="login-container">
+    <img src="../src/assets/img/BugtraceLogo.gif" class="level-left">
+    <img src="../src/assets/img/transparentBug.png" class="logo">
     <LoginForm />
 </div>
-  
 </template>
 
 <script>
@@ -16,6 +15,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.logo {
+  max-width: 250px;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
 </style>
