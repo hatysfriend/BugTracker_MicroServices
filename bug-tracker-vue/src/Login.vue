@@ -2,18 +2,21 @@
 <div class="login-container">
     <img src="../src/assets/img/BugtraceLogo.gif" class="level-left">
     <img src="../src/assets/img/transparentBug.png" class="logo">
-    <LoginForm @error="setMessage"/>
+    <router-link to="/login">Login</router-link>
+    <router-link to="/register">Register</router-link>
+    <router-view></router-view>
+    <!-- <LoginForm @error="setMessage"/> -->
     <Flash :isError='true' :message='message'/>
 </div>
 </template>
 
 <script>
-import LoginForm from '../src/components/LoginForm';
+// import LoginForm from '../src/components/LoginForm';
 import Flash from '../src/components/FlashMessage';
 
 export default {
     components: {
-        LoginForm,
+        // LoginForm,
         Flash
     },
     data() {

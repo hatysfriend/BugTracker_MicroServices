@@ -7,6 +7,7 @@ module.exports = (() => {
   database.GetDbInstance();
 
   async function _getUser(userQuery) {
+    console.log("herexxxx"+ JSON.stringify(userQuery));
     return UserModel.findOne(userQuery);
   }
 

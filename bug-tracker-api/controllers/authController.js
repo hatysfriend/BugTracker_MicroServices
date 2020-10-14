@@ -35,8 +35,9 @@ module.exports = {
         let errMsg = err;
         if (err.code === 11000) {
           errMsg = 'That Username Is Already Taken';
+          res.status(500).send(errMsg);
         }
-        res.status(500).send(errMsg);
+        res.status(500).send();
       });
   },
 
@@ -54,6 +55,7 @@ module.exports = {
         res.json({ accessToken, refreshToken });
       })
       .catch((err) => {
+        console.log(err);
         res.status(401).send({ error: err });
       });
   },

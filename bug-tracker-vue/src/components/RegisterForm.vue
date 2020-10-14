@@ -1,21 +1,21 @@
 <template>
   <div class="login-container">
     <div class="account-form">
-      <h3 class="title is-3"><strong>Log in to Bugtrace</strong></h3>
+      <h3 class="title is-3"><strong>Welcome to bug trace</strong></h3>
       <div class="field mb-4">
         <input type="text" name="username" class="input" placeholder="Enter username" v-model="user.username" @keydown="resetMessage"/>
       </div>
       <div class="field">
         <input type="password" name="password" class="input" placeholder="Enter password" v-model="user.password" @keydown="resetMessage"/>
       </div>
-      <input type="submit" value="Login" class="button is-primary is-fullwidth mt-5" @click="login"/>
+      <input type="submit" value="Register" class="button is-primary is-fullwidth mt-5" @click="register"/>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "LoginFormComponent",
+  name: "RegisterFormComponent",
   data() {
     return {
       user: {
@@ -35,8 +35,8 @@ export default {
     setMessage(message) {
       this.$emit("error", message);
     },
-    async login() {
-      fetch(`http://localhost:3002/auth/login`, {
+    async register() {
+      fetch(`http://localhost:3002/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -46,16 +46,16 @@ export default {
       })
       .then((res) => {
         res.json().then((data) => {
+          //Route From Here
           console.log(data);
           this.resetForm();
-          localStorage.setItem("accesToken", JSON.stringify(data.accessToken));
-          localStorage.setItem("refreshToken", JSON.stringify(data.refreshToken));
-          this.$router.push({ name: 'main'});
         })
       })
-      .catch(() => {
+      .catch((err) => {
         this.resetForm();
-        this.setMessage("Something Went Wrong, Try Again!");
+        console.log(JSON.stringify(err));
+        // if(err.errMsg)
+        // this.setMessage(err.errMsg);
       })
     },
   },

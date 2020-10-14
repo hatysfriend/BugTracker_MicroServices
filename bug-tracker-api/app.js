@@ -6,6 +6,7 @@ const chroma = require('chroma-log');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const bugRouter = require('./routes/bug-routes');
+const cors = require('cors');
 // const commentRouter = require('./routes/comments-routes');
 const authRouter = require('./routes/auth-routes');
 
@@ -19,9 +20,14 @@ const app = express();
 //   resave: false,
 //   saveUninitialized: true
 // }));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
+const corstOpt = {
+  origin: 'http://localhost:8080'
+}
+app.use(cors(corstOpt));
 // app.use(passport.session());
 
 // No Flash Anymore
