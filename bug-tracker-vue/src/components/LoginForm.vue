@@ -8,7 +8,7 @@
       <div class="field">
         <input type="password" name="password" class="input" placeholder="Enter password" v-model="user.password" @keydown="resetMessage"/>
       </div>
-      <input type="submit" value="Login" class="button is-primary is-fullwidth mt-5" @click="login"/>
+      <button value="Login" class="button is-primary is-fullwidth mt-5" @click="login"/>
     </div>
   </div>
 </template>

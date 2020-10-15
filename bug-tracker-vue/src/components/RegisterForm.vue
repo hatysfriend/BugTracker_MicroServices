@@ -1,3 +1,4 @@
+
 <template>
   <div class="login-container">
     <div class="account-form">
@@ -8,7 +9,7 @@
       <div class="field">
         <input type="password" name="password" class="input" placeholder="Enter password" v-model="user.password" @keydown="resetMessage"/>
       </div>
-      <input type="submit" value="Register" class="button is-primary is-fullwidth mt-5" @click="register"/>
+      <button value="Register" class="button is-primary is-fullwidth mt-5" @click="register"/>
     </div>
   </div>
 </template>

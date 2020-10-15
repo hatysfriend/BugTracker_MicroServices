@@ -14,11 +14,11 @@ Vue.use(VueRouter);
 Vue.config.productionTip = false
 
 const routes = [
+  {path: '/main', name: 'main', component: Main},
   {path: '/', component: Login, children: [
     {path: '/register', component: RegisterForm},
     {path: '/login', component: LoginForm}
   ]},
-  {path: '/main', name: 'main', component: Main}
 ]
 
 const router = new VueRouter({
