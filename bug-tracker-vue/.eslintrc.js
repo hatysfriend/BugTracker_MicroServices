@@ -1,6 +1,6 @@
 module.exports = {
   // watch this for explaining why some of this is here
-  extends: '@vue/eslint-config-airbnb',
+  extends: ['eslint:recommended', 'plugin:vue/recommended'],
   rules: {
     'no-underscore-dangle': 'off',
     'comma-dangle': 'off',

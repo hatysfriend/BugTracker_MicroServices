@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "set CONNECTION=mongodb://localhost:27017/testDB&& mocha test --exit",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "old": "docker-compose up -d && set CONNECTION=mongodb://localhost:30000/bugDB&& nodemon server.js"
   },
   "keywords": [
@@ -46,7 +46,7 @@
     "ignore": [
       "node_modules/**/node_modules"
     ],
-    "delay": "2000",
+    "delay": "1000",
     "env": {}
   }
 }

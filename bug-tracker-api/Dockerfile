@@ -1,8 +1,7 @@
 FROM node:12
 
-RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-COPY . .
+COPY package*.json ./
 RUN npm install
-EXPOSE 3002
-CMD ["npm", "start"]
+RUN npm install nodemon -g
+COPY . .

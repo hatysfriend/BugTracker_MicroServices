@@ -7,6 +7,10 @@ services:
       - "3002:3002"
     links:
       - mongo
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm start
   mongo:
     image: mongo:latest
     ports:

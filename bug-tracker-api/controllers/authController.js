@@ -17,6 +17,7 @@ const generateRefreshToken = (user) => {
 module.exports = {
   register_a_user_post: async (req, res) => {
     const user = await authHelper.createEncryptedUser(req.body.username, req.body.password);
+    console.log('trash');
     repo.InsertUser(user)
       .then(() => {
         authenticator.authenticate(req.body.username, req.body.password)
@@ -38,6 +39,8 @@ module.exports = {
           res.status(500).send(errMsg);
         }
         res.status(500).send();
+        // eslint-disable-next-line no-console
+        console.log(`ERROR:${errMsg}`);
       });
   },
 
@@ -55,7 +58,6 @@ module.exports = {
         res.json({ accessToken, refreshToken });
       })
       .catch((err) => {
-        console.log(err);
         res.status(401).send({ error: err });
       });
   },
