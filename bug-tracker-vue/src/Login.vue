@@ -10,25 +10,24 @@
 </template>
 
 <script>
-// import LoginForm from '../src/components/LoginForm';
-import Flash from '../src/components/FlashMessage';
+import Flash from './components/FlashMessage.vue';
 
 export default {
-    components: {
-        // LoginForm,
-        Flash
-    },
-    data() {
-        return {
-            message: ''
-        }
-    },
-    methods: {
-        setMessage(message) {
-            this.message = message;
-        }
+  components: {
+    // LoginForm,
+    Flash
+  },
+  data() {
+    return {
+      message: ''
+    };
+  },
+  methods: {
+    setMessage(message) {
+      this.message = message;
     }
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>

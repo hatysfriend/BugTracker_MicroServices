@@ -1,31 +1,17 @@
 import Vue from 'vue';
+import { Vue2Dragula } from 'vue2-dragula';
 import App from './App.vue';
-import VueDragula from 'vue-dragula';
-import VueRouter from 'vue-router';
-import './assets/styles/main.scss'
 
-import Login from './Login.vue'
-import LoginForm from './components/LoginForm.vue';
-import RegisterForm from './components/RegisterForm.vue';
-import Main from './Main.vue';
+import router from './router/routes';
 
-Vue.use(VueDragula);
-Vue.use(VueRouter);
-Vue.config.productionTip = false
+import './assets/styles/main.scss';
 
-const routes = [
-  {path: '/main', name: 'main', component: Main},
-  {path: '/', component: Login, children: [
-    {path: '/register', component: RegisterForm},
-    {path: '/login', component: LoginForm}
-  ]},
-]
-
-const router = new VueRouter({
-  routes
-});
+Vue.use(Vue2Dragula);
+Vue.config.productionTip = false;
 
 new Vue({
   router,
-  render: h => h(App),
-}).$mount('#app')
+  render: (h) => {
+    return h(App);
+  },
+}).$mount('#app');
