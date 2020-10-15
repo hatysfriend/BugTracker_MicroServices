@@ -1,4 +1,3 @@
-
 <template>
   <div class="login-container">
     <div class="account-form">
@@ -16,7 +15,7 @@
 
 <script>
 export default {
-  name: "RegisterFormComponent",
+  name: 'RegisterFormComponent',
   data() {
     return {
       user: {
@@ -31,33 +30,33 @@ export default {
       this.user.password = undefined;
     },
     resetMessage() {
-      this.$emit("error", '');
+      this.$emit('error', '');
     },
     setMessage(message) {
-      this.$emit("error", message);
+      this.$emit('error', message);
     },
     async register() {
-      fetch(`http://localhost:3002/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      fetch('http://localhost:3002/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           username: this.user.username,
           password: this.user.password,
         }),
       })
-      .then((res) => {
-        res.json().then((data) => {
-          //Route From Here
-          console.log(data);
-          this.resetForm();
+        .then((res) => {
+          res.json().then((data) => {
+          // Route From Here
+            console.log(data);
+            this.resetForm();
+          });
         })
-      })
-      .catch((err) => {
-        this.resetForm();
-        console.log(JSON.stringify(err));
+        .catch((err) => {
+          this.resetForm();
+          console.log(JSON.stringify(err));
         // if(err.errMsg)
         // this.setMessage(err.errMsg);
-      })
+        });
     },
   },
 };

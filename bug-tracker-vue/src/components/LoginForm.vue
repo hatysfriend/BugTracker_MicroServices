@@ -3,25 +3,43 @@
     <div class="account-form">
       <h3 class="title is-3"><strong>Log in to Bugtrace</strong></h3>
       <div class="field mb-4">
-        <input type="text" name="username" class="input" placeholder="Enter username" v-model="user.username" @keydown="resetMessage"/>
+        <input
+          type="text"
+          name="username"
+          class="input"
+          placeholder="Enter username"
+          v-model="user.username"
+          @keydown="resetMessage"
+        />
       </div>
       <div class="field">
-        <input type="password" name="password" class="input" placeholder="Enter password" v-model="user.password" @keydown="resetMessage"/>
+        <input
+          type="password"
+          name="password"
+          class="input"
+          placeholder="Enter password"
+          v-model="user.password"
+          @keydown="resetMessage"
+        />
       </div>
-      <button value="Login" class="button is-primary is-fullwidth mt-5" @click="login"/>
+      <button
+        value="Login"
+        class="button is-primary is-fullwidth mt-5"
+        @click="login"
+      />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "LoginFormComponent",
+  name: 'LoginFormComponent',
   data() {
     return {
       user: {
         username: undefined,
-        password: undefined
-      }
+        password: undefined,
+      },
     };
   },
   methods: {
@@ -30,33 +48,39 @@ export default {
       this.user.password = undefined;
     },
     resetMessage() {
-      this.$emit("error", '');
+      this.$emit('error', '');
     },
     setMessage(message) {
-      this.$emit("error", message);
+      this.$emit('error', message);
     },
     async login() {
-      fetch(`http://localhost:3002/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      fetch('http://localhost:3002/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           username: this.user.username,
           password: this.user.password,
         }),
       })
-      .then((res) => {
-        res.json().then((data) => {
-          console.log(data);
-          this.resetForm();
-          localStorage.setItem("accesToken", JSON.stringify(data.accessToken));
-          localStorage.setItem("refreshToken", JSON.stringify(data.refreshToken));
-          this.$router.push({ name: 'main'});
+        .then((res) => {
+          res.json().then((data) => {
+            console.log(data);
+            this.resetForm();
+            localStorage.setItem(
+              'accesToken',
+              JSON.stringify(data.accessToken)
+            );
+            localStorage.setItem(
+              'refreshToken',
+              JSON.stringify(data.refreshToken)
+            );
+            this.$router.push({ name: 'main' });
+          });
         })
-      })
-      .catch(() => {
-        this.resetForm();
-        this.setMessage("Something Went Wrong, Try Again!");
-      })
+        .catch(() => {
+          this.resetForm();
+          this.setMessage('Something Went Wrong, Try Again!');
+        });
     },
   },
 };

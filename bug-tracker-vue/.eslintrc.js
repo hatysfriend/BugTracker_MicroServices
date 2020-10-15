@@ -20,6 +20,8 @@ module.exports = {
     'linebreak-style': ['error', 'windows'],
     'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],
     'arrow-body-style': ['error', 'always'],
-    'consistent-return': 'off'
+    'consistent-return': 'off',
+    'max-len': ['error', { code: 150 }],
+    'no-console': 'off',
   }
 };
