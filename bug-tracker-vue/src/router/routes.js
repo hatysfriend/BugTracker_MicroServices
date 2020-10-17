@@ -11,10 +11,15 @@ const routes = [
   { path: '/main', name: 'main', component: Main },
   {
     path: '/',
+    name: 'Login',
     component: Login,
-    children: [
-      { path: '/register', component: RegisterForm },
-      { path: '/login', component: LoginForm }
+    children: [{
+      path: '/register', name: 'RegisterForm', component: RegisterForm, props: true
+    },
+    {
+      path: '/login', name: 'LoginForm', component: LoginForm, props: true
+    },
+    { path: '/', component: LoginForm }
     ]
   },
 ];

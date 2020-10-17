@@ -1,13 +1,19 @@
+.hover-light:hover {
+  color: white;
+}
 
-// .container {
-//   border: solid;
-//   border-color: #383838;
-//   background-color: #383838;
-//   border-radius: 1%; 
-//   height:max-content;
-//   min-height:2rem;
-// }
-
+.account-form {
+  display: block;
+  max-width: 27.2%;
+  min-width: 22rem;
+  margin: 0 auto;
+  position: relative;
+  background-color: #383838;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: rgba(255, 255, 255, 0.1) 0 0 2px;
+  text-align: center;
+}
 
 // .modal-header {
 //   display: block;

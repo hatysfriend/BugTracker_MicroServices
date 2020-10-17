@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="account-form">
-      <h3 class="title is-3"><strong>Log in to Bugtrace</strong></h3>
+      <h3 class="title is-3"><strong>Log in</strong></h3>
       <div class="field mb-4">
         <input type="text" name="username" class="input"
           placeholder="Enter username" v-model="user.username" @keydown="resetMessage" />
@@ -9,7 +9,10 @@
       <div class="field">
         <input type="password" name="password" class="input" placeholder="Enter password" v-model="user.password" @keydown="resetMessage" />
       </div>
-      <button class="button is-primary is-fullwidth mt-5" @click="login">Login</button>
+      <button class="button is-primary is-fullwidth mt-5 mb-3" @click="login">Login</button>
+      <router-link :to="{name: 'RegisterForm', params: {isAnimated: false}}">
+        <a @click="emitAnimationData" class="hover-light">Dont have an account with us? Register</a>
+      </router-link>
     </div>
   </div>
 </template>
@@ -17,6 +20,12 @@
 <script>
 export default {
   name: 'LoginFormComponent',
+  props: {
+    isAnimated: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       user: {
@@ -35,6 +44,9 @@ export default {
     },
     setMessage(message) {
       this.$emit('error', message);
+    },
+    emitAnimationData() {
+      this.$emit('animate', this.isAnimated);
     },
     async login() {
       fetch('http://localhost:3002/auth/login', {
@@ -70,16 +82,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.account-form {
-  display: block;
-  max-width: 27.2%;
-  min-width: 22rem;
-  margin: 0 auto;
-  position: relative;
-  background-color: #383838;
-  border-radius: 15px;
-  padding: 35px 40px;
-  box-shadow: rgba(255, 255, 255, 0.1) 0 0 2px;
-  text-align: center;
-}
 </style>
