@@ -10,11 +10,45 @@
       <span aria-hidden="true"></span>
     </a>
   </div>
+
+  <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-light">
+            Log in
+          </a>
+        </div>
+      </div>
+    </div>
+  <!-- <div class="navbar-end">
+    <div class="navbar-item">
+      <div>Hi {{ username }}!</div>
+    </div>
+    <div class="navbar-item">
+      <div class="buttons">
+        <button class="logout-button button is-small is-warning">Logout</button>
+      </div>
+    </div>
+  </div> -->
 </nav>
 </template>
 
 <script>
+// import SocialLinks from './SocialLinks.vue';
+
 export default {
+  components: {
+    // SocialLinks
+  },
+  props: {
+    username: {
+      type: String,
+      required: true
+    }
+  },
 };
 </script>
 

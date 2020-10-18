@@ -9,7 +9,7 @@
       <div class="field">
         <input type="password" name="password" class="input" placeholder="Enter password" v-model="user.password" @keydown="resetMessage" />
       </div>
-      <button class="button is-primary is-fullwidth mt-5 mb-3" @click="login">Login</button>
+      <button class="button is-primary is-fullwidth mt-5 mb-5" @click="login">Login</button>
       <router-link :to="{name: 'RegisterForm', params: {isAnimated: false}}">
         <a @click="emitAnimationData" class="hover-light">Dont have an account with us? Register</a>
       </router-link>
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import jwtserializer from '../scripts/jwt-serializer';
+
 export default {
   name: 'LoginFormComponent',
   props: {
@@ -61,14 +63,8 @@ export default {
           res.json().then((data) => {
             console.log(data);
             this.resetForm();
-            localStorage.setItem(
-              'accesToken',
-              JSON.stringify(data.accessToken)
-            );
-            localStorage.setItem(
-              'refreshToken',
-              JSON.stringify(data.refreshToken)
-            );
+            jwtserializer.storeJwt(data.accessToken);
+            jwtserializer.storeRefresh(data.refreshToken);
             this.$router.push({ name: 'main' });
           });
         })

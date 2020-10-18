@@ -21,7 +21,7 @@ module.exports = {
     'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],
     'arrow-body-style': ['error', 'always'],
     'consistent-return': 'off',
-    'max-len': ['error', { code: 150 }],
+    'max-len': 'off',
     'no-console': 'off',
   }
 };
