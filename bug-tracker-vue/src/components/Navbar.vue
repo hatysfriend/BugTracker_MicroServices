@@ -12,27 +12,16 @@
   </div>
 
   <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
-          </a>
-        </div>
-      </div>
-    </div>
-  <!-- <div class="navbar-end">
-    <div class="navbar-item">
+    <div class="navbar-item mr-2">
       <div>Hi {{ username }}!</div>
     </div>
-    <div class="navbar-item">
+
+    <div class="navbar-item mr-2">
       <div class="buttons">
-        <button class="logout-button button is-small is-warning">Logout</button>
+        <a class="button is-small is-danger is-outlined"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
       </div>
     </div>
-  </div> -->
+  </div>
 </nav>
 </template>
 
@@ -54,6 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/styles/main.scss';
+
 .navbar {
   background: $background-secondary;
 }
@@ -66,4 +56,5 @@ export default {
 .navbar-item img {
   max-height: 100%;
 }
+
 </style>

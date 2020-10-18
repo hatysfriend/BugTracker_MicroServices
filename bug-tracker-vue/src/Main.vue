@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar v-bind="username"/>
+    <Navbar :username = jwtData.username />
     <div id="main">
     <div class="columns" id="containerGroup">
       <div class="column">

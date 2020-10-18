@@ -5,6 +5,8 @@ import App from './App.vue';
 import router from './router/routes';
 
 import './assets/styles/main.scss';
+import '@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/js/all';
 
 Vue.use(Vue2Dragula);
 Vue.config.productionTip = false;
