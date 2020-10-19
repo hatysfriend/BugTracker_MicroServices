@@ -19,37 +19,12 @@
 
 <script>
 import jwtserializer from '../scripts/jwt-serializer';
+import authformmixin from '../mixins/auth-form-mixin';
 
 export default {
   name: 'LoginFormComponent',
-  props: {
-    isAnimated: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-      user: {
-        username: undefined,
-        password: undefined,
-      },
-    };
-  },
+  mixins: [authformmixin],
   methods: {
-    resetForm() {
-      this.user.username = undefined;
-      this.user.password = undefined;
-    },
-    resetMessage() {
-      this.$emit('error', '');
-    },
-    setMessage(message) {
-      this.$emit('error', message);
-    },
-    emitAnimationData() {
-      this.$emit('animate', this.isAnimated);
-    },
     async login() {
       fetch('http://localhost:3002/auth/login', {
         method: 'POST',
@@ -65,7 +40,7 @@ export default {
             this.resetForm();
             jwtserializer.storeJwt(data.accessToken);
             jwtserializer.storeRefresh(data.refreshToken);
-            this.$router.push({ name: 'main' });
+            this.$router.push({ name: 'loginform' });
           });
         })
         .catch(() => {

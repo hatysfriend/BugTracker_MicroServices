@@ -42,16 +42,16 @@
 
 <script>
 import Navbar from './components/Navbar.vue';
-import jwtserializer from './scripts/jwt-serializer';
+import jwtmixin from './mixins/jwt-handler-mixin';
 // import BugCard from './components/BugCard.vue';
 
 export default {
   components: {
     Navbar
   },
+  mixins: [jwtmixin],
   data() {
     return {
-      jwt: undefined,
       bugs: [],
       createdBugs: [],
       inProgressBugs: [],
@@ -75,9 +75,6 @@ export default {
           console.log(err);
         });
     },
-    fetchJWT() {
-      this.jwt = jwtserializer.getJwt();
-    },
     sortBugs() {
       this.createdBugs = this.bugs.filter((bug) => {
         return bug.status === 'Created';
@@ -90,18 +87,7 @@ export default {
       });
     }
   },
-  computed: {
-    jwtData() {
-      if (this.jwt) {
-        const data = JSON.parse(atob(this.jwt.split('.')[1]));
-        console.log(data);
-        return data;
-      }
-      return {};
-    }
-  },
   created() {
-    this.fetchJWT();
     this.getBugs();
   },
 };
