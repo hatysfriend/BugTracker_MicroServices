@@ -40,7 +40,7 @@ export default {
             this.resetForm();
             jwtserializer.storeJwt(data.accessToken);
             jwtserializer.storeRefresh(data.refreshToken);
-            this.$router.push({ name: 'loginform' });
+            this.$router.push({ name: 'main' });
           });
         })
         .catch(() => {
