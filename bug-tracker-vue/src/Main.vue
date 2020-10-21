@@ -1,6 +1,5 @@
 <template>
   <div v-if="jwt != undefined">
-    {{ jwt }}
     <Navbar :username = jwtData.username />
     <div id="main">
     <div class="columns" id="containerGroup">
@@ -96,6 +95,11 @@ export default {
     }
   },
   created() {
+    if (this.jwt === null) {
+      console.log('Reouting To Login');
+      this.$router.push({ name: '/' });
+      return false;
+    }
     if (this.jwt) {
       this.getBugs();
     }

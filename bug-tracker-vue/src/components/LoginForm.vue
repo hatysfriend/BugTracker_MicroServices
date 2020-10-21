@@ -1,17 +1,36 @@
 <template>
   <div class="login-container">
-    <div class="account-form">
+    <div @click="secret" class="account-form">
       <h3 class="title is-3"><strong>Log in</strong></h3>
       <div class="field mb-4">
-        <input type="text" name="username" class="input"
-          placeholder="Enter username" v-model="user.username" @keydown="resetMessage" />
+        <input
+          type="text"
+          name="username"
+          class="input"
+          placeholder="Enter username"
+          v-model="user.username"
+          @keydown="resetMessage"
+        />
       </div>
       <div class="field">
-        <input type="password" name="password" class="input" placeholder="Enter password" v-model="user.password" @keydown="resetMessage" />
+        <input
+          type="password"
+          name="password"
+          class="input"
+          placeholder="Enter password"
+          v-model="user.password"
+          @keydown="resetMessage"
+        />
       </div>
-      <button class="button is-primary is-fullwidth mt-5 mb-5" @click="login">Login</button>
-      <router-link :to="{name: 'RegisterForm', params: {isAnimated: false}}">
-        <a @click="emitAnimationData" class="hover-light">Dont have an account with us? Register</a>
+      <button class="button is-primary is-fullwidth mt-5 mb-5" @click="login">
+        Login
+      </button>
+      <router-link
+        :to="{ name: 'RegisterForm', params: { isAnimated: false } }"
+      >
+        <a @click="emitAnimationData" class="hover-light"
+          >Dont have an account with us? Register</a
+        >
       </router-link>
     </div>
   </div>

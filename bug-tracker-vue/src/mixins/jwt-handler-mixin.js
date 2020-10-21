@@ -21,6 +21,11 @@ export default {
   methods: {
     async fetchJWT() {
       const jwt = jwtserializer.getJwt();
+      // if (jwt === null) {
+      //   console.log('Reouting To Login');
+      //   this.$router.push({ name: '/' });
+      //   return false;
+      // }
       const result = await this.checkAccessTokenIsExpired(jwt);
       console.log(result);
       if (result) {
@@ -33,18 +38,18 @@ export default {
       }
     },
     async getRefreshToken() {
-      const token = jwtserializer.getRefresh();
-      const res = await fetch('http://localhost:3002/auth/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          token
-        })
-      });
-      const dataReturn = await res.json();
-      return dataReturn;
+      // const token = jwtserializer.getRefresh();
+      // const res = await fetch('http://localhost:3002/auth/token', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     token
+      //   })
+      // });
+      // const dataReturn = await res.json();
+      // return dataReturn;
     },
     async checkAccessTokenIsExpired(jwt) {
       const data = JSON.parse(atob(jwt.split('.')[1]));
@@ -53,7 +58,19 @@ export default {
       console.log(`expiry TIme: ${expiryTime}  Current Time: ${currentTime}`);
       console.log((expiryTime - currentTime));
       if ((expiryTime - currentTime) < 60000) {
-        await this.getRefreshToken();
+        // await this.getRefreshToken();
+        const token = jwtserializer.getRefresh();
+        const res = await fetch('http://localhost:3002/auth/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            token
+          })
+        });
+        const dataReturn = await res.json();
+        return dataReturn;
       }
     }
   }

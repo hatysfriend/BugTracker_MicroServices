@@ -6,15 +6,18 @@
         :class="{ 'fade-in-anim' : isAnimated, 'start-opaque' : isAnimated, 'blur-short-anim' : !isAnimated}">
       </router-view>
     <Flash :isError="true" :message="message" />
+    <Secret />
   </div>
 </template>
 
 <script>
 import Flash from './components/FlashMessage.vue';
+import Secret from './components/Secret.vue';
 
 export default {
   components: {
     Flash,
+    Secret
   },
   data() {
     return {

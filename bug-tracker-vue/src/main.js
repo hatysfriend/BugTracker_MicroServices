@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { Vue2Dragula } from 'vue2-dragula';
 import App from './App.vue';
+import store from './scripts/store';
 
 import router from './router/routes';
 
@@ -13,6 +14,7 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   render: (h) => {
     return h(App);
   },
