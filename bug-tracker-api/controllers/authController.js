@@ -7,7 +7,7 @@ const tokenRepo = require('../data/tokenRepository');
 require('dotenv').config();
 
 const generateAccessToken = (user) => {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '900s' });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '45s' });
 };
 
 const generateRefreshToken = (user) => {
@@ -51,9 +51,10 @@ module.exports = {
           id: userReturn._id,
           username: userReturn.username
         };
+        tokenRepo.DeleteTokenByUserId(user.id);
         const accessToken = generateAccessToken(user);
         const refreshToken = generateRefreshToken(user);
-        tokenRepo.InsertToken({ token: refreshToken, username: user.username });
+        tokenRepo.InsertToken({ token: refreshToken, userId: user.id });
         res.status(200);
         res.json({ accessToken, refreshToken });
       })
@@ -76,7 +77,7 @@ module.exports = {
       if (err) {
         return res.sendStatus(403);
       }
-      const accessToken = generateAccessToken({ id: user.id, username: user.name });
+      const accessToken = generateAccessToken({ id: user.id, username: user.username });
       return res.json({ accessToken });
     });
   },

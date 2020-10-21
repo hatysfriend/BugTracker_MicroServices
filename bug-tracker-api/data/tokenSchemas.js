@@ -6,10 +6,7 @@ const tokenSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  username: {
-    type: String,
-    required: true
-  }
+  userId: { type: mongoose.Schema.Types.ObjectId }
 });
 
 const tokenModel = mongoose.model('tokens', tokenSchema);

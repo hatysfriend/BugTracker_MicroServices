@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div v-if="jwt != undefined">
+    {{ jwt }}
     <Navbar :username = jwtData.username />
     <div id="main">
     <div class="columns" id="containerGroup">
@@ -58,8 +59,15 @@ export default {
       fixedBugs: []
     };
   },
+  watch: {
+    jwt(newVal, oldVal) {
+      console.log(`Watcher Trigger ${newVal}, ${oldVal}`);
+      this.getBugs();
+    }
+  },
   methods: {
     getBugs() {
+      console.log(`BUGDS${this.jwt}`);
       fetch('http://localhost:3002/bugs/getAll', {
         headers: new Headers({
           Authorization: `Bearer: ${this.jwt}`
@@ -88,7 +96,9 @@ export default {
     }
   },
   created() {
-    this.getBugs();
+    if (this.jwt) {
+      this.getBugs();
+    }
   },
 };
 </script>
