@@ -3,9 +3,11 @@ const refreshKey = 'refreshToken';
 
 export default {
   storeJwt: (jwt) => {
+    localStorage.removeItem('accessToken');
     localStorage.setItem(tokenKey, jwt);
   },
   storeRefresh: (jwt) => {
+    localStorage.removeItem('refreshToken');
     localStorage.setItem(refreshKey, jwt);
   },
   getJwt: () => {
