@@ -15,18 +15,18 @@ const routes = [
     name: 'main',
     component: Main,
     meta: {
-      middleware: [authCheck]
+      middleware: authCheck
     }
   },
   {
     path: '/',
-    name: 'Login',
+    name: 'login',
     component: Login,
     children: [{
-      path: '/register', name: 'RegisterForm', component: RegisterForm, props: true
+      path: '/register', name: 'registerForm', component: RegisterForm, props: true
     },
     {
-      path: '/', name: 'LoginForm', component: LoginForm, props: true
+      path: '/', name: 'loginForm', component: LoginForm, props: true
     }]
   },
 ];
@@ -38,6 +38,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (!to.meta.middleware) {
+    console.log('We will continue');
     return next();
   }
 
@@ -47,7 +48,7 @@ router.beforeEach((to, from, next) => {
     to, from, next, store
   };
 
-  return middleware[0]({
+  return middleware({
     ...context
   });
 });

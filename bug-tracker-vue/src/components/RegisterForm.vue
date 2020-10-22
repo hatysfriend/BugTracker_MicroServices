@@ -9,7 +9,7 @@
         <input type="password" name="password" class="input" placeholder="Enter password" v-model="user.password" @keydown="resetMessage"/>
       </div>
       <button value="Register" class="button is-primary is-fullwidth mt-5 mb-5" @click="register">Register</button>
-      <router-link :to="{name: 'LoginForm', params: { isAnimated: false }}">
+      <router-link :to="{name: 'loginForm', params: { isAnimated: false }}">
         <a @click="emitAnimationData" class="hover-light">Already have an account?</a>
       </router-link>
     </div>

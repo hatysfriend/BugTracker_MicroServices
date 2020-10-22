@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <div @click="secret" class="account-form">
+    <div class="account-form">
       <h3 class="title is-3"><strong>Log in</strong></h3>
       <div class="field mb-4">
         <input
@@ -26,7 +26,7 @@
         Login
       </button>
       <router-link
-        :to="{ name: 'RegisterForm', params: { isAnimated: false } }"
+        :to="{ name: 'registerForm', params: { isAnimated: false } }"
       >
         <a @click="emitAnimationData" class="hover-light"
           >Dont have an account with us? Register</a
@@ -39,6 +39,7 @@
 <script>
 import jwtserializer from '../scripts/jwt-serializer';
 import authformmixin from '../mixins/auth-form-mixin';
+import store from '../scripts/store';
 
 export default {
   name: 'LoginFormComponent',
@@ -59,6 +60,7 @@ export default {
             this.resetForm();
             jwtserializer.storeJwt(data.accessToken);
             jwtserializer.storeRefresh(data.refreshToken);
+            store.commit('setLoggedInStatus', true);
             this.$router.push({ name: 'main' });
           });
         })
