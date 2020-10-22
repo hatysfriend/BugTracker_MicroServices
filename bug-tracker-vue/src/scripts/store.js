@@ -8,8 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: {
-      loggedIn: false,
-      isSubscribed: false
+      loggedIn: false
     }
   },
   getters: {
