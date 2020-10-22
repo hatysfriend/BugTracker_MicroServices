@@ -3,11 +3,12 @@
     <Navbar :username = jwtData.username />
     <div id="main">
     <div class="columns" id="containerGroup">
+
       <div class="column">
         <h5 class="notification is-danger">Created</h5>
-        <div class="container" v-dragula="containerOne" drake="first-bag" id="Created">
-          <div v-for="bug in createdBugs" :key="bug.description">
-            {{ bug.description }}
+        <div class="container" v-dragula="colOne" service="itemsService" drake="items">
+          <div v-for="bug in createdBugs" :key="bug._id">
+            <BugCard :bug="bug"/>
           </div>
         </div>
         <button class="buttton is-primary">+ Add Another Card</button>
@@ -15,9 +16,9 @@
 
       <div class="column">
         <h5 class="notification is-warning">In-Progress</h5>
-        <div class="container" v-dragula="contianerTwo" drake="first-bag" id="In-Progress">
-          <div v-for="bug in inProgressBugs" :key="bug.description">
-            {{ bug.description }}
+        <div class="container" v-dragula="colTwo" service="itemsService" drake="items">
+          <div v-for="bug in inProgressBugs" :key="bug._id">
+            <BugCard :bug="bug"/>
           </div>
         </div>
         <button class="buttton is-primary">+ Add Another Card</button>
@@ -25,14 +26,15 @@
 
       <div class="column">
         <h5 class="notification is-success">Fixed</h5>
-        <div class="container" v-dragula="containerThree" drake="first-bag" id="Fixed">
-          <div v-for="bug in fixedBugs" :key="bug.description">
-            {{ bug.description }}
+        <div class="container" @dropModel="dragHandler" v-dragula="colThree" service="itemsService" drake="items">
+          <div v-for="bug in fixedBugs" :key="bug._id">
+            <BugCard :bug="bug"/>
           </div>
         </div>
         <button class="buttton is-primary">+ Add Another Card</button>
       </div>
     </div>
+
   </div>
   <p>JWT: {{jwt}}</p>
     <p>User ID: {{jwtData.id}}</p>
@@ -43,11 +45,12 @@
 <script>
 import Navbar from './components/Navbar.vue';
 import jwtmixin from './mixins/jwt-handler-mixin';
-// import BugCard from './components/BugCard.vue';
+import BugCard from './components/BugCard.vue';
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    BugCard
   },
   mixins: [jwtmixin],
   data() {
@@ -55,7 +58,10 @@ export default {
       bugs: [],
       createdBugs: [],
       inProgressBugs: [],
-      fixedBugs: []
+      fixedBugs: [],
+      colOne: [],
+      colTwo: [],
+      colThree: []
     };
   },
   watch: {
@@ -65,6 +71,9 @@ export default {
     }
   },
   methods: {
+    dragHandler(index, model, element) {
+      console.log(`${index} ${model} ${element}`);
+    },
     getBugs() {
       console.log(`BUGDS${this.jwt}`);
       fetch('http://localhost:3002/bugs/getAll', {
@@ -95,6 +104,27 @@ export default {
     }
   },
   created() {
+    this.$dragula.createService({
+      name: 'itemsService',
+      drakes: {
+        items: {
+          moves: (el, source, handle, sibling) => {
+            console.log(`${el} ${JSON.stringify(source)} ${JSON.stringify(handle)} ${JSON.stringify(sibling)}`);
+            return true;
+          },
+          dropModel: (name, el, source, target) => {
+            console.log(`Source ${source} Target: ${target}`);
+          }
+        }
+      },
+      options: {}
+    });
+
+    const { $service } = this.$dragula;
+    $service.eventBus.$on('dropModel', (args) => {
+      console.log(args);
+    });
+
     if (this.jwt === null) {
       console.log('Reouting To Login');
       this.$router.push({ name: '/' });
@@ -108,12 +138,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  border-style: solid;
-  border-width: 2px;
-  border-color: aqua;
-}
-
 .gu-mirror {
   max-height: 1px;
   max-width: 1px;
@@ -125,10 +149,13 @@ export default {
 
 .container {
   border: solid;
-  border-color: #383838;
-  background-color: #383838;
+  border-width: 2px;
+  border-color: #303030;
+  background-color: #303030;
   border-radius: 1%;
   height: max-content;
   min-height: 2rem;
+  padding: 10px;
 }
+
 </style>
