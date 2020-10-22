@@ -3,7 +3,6 @@
     <Navbar :username = jwtData.username />
     <div id="main">
     <div class="columns" id="containerGroup">
-
       <div class="column">
         <h5 class="notification is-danger">Created</h5>
         <div class="container" v-dragula="colOne" service="itemsService" drake="items">
@@ -26,7 +25,7 @@
 
       <div class="column">
         <h5 class="notification is-success">Fixed</h5>
-        <div class="container" @dropModel="dragHandler" v-dragula="colThree" service="itemsService" drake="items">
+        <div class="container" v-dragula="colThree" service="itemsService" drake="items">
           <div v-for="bug in fixedBugs" :key="bug._id">
             <BugCard :bug="bug"/>
           </div>
@@ -64,21 +63,11 @@ export default {
       colThree: []
     };
   },
-  watch: {
-    jwt(newVal, oldVal) {
-      console.log(`Watcher Trigger ${newVal}, ${oldVal}`);
-      this.getBugs();
-    }
-  },
   methods: {
-    dragHandler(index, model, element) {
-      console.log(`${index} ${model} ${element}`);
-    },
-    getBugs() {
-      console.log(`BUGDS${this.jwt}`);
+    async getBugs() {
       fetch('http://localhost:3002/bugs/getAll', {
         headers: new Headers({
-          Authorization: `Bearer: ${this.jwt}`
+          Authorization: `Bearer: ${await this.getJwt()}`
         })
       })
         .then((res) => {
@@ -104,6 +93,7 @@ export default {
     }
   },
   created() {
+    this.getBugs();
     this.$dragula.createService({
       name: 'itemsService',
       drakes: {
@@ -124,15 +114,6 @@ export default {
     $service.eventBus.$on('dropModel', (args) => {
       console.log(args);
     });
-
-    if (this.jwt === null) {
-      console.log('Reouting To Login');
-      this.$router.push({ name: '/' });
-      return false;
-    }
-    if (this.jwt) {
-      this.getBugs();
-    }
   },
 };
 </script>

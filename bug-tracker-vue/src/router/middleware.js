@@ -1,8 +1,9 @@
-export default function authCheck({ next, store }) {
-  if (!store.getters.auth.loggedIn) {
-    console.log(`MIDDLEWARE: ${JSON.stringify(store.getters.auth.loggedIn)}`);
+import jwtSerializer from '../scripts/jwt-serializer';
+
+export default function authCheck({ next }) {
+  if (!jwtSerializer.getJwt()) {
     return next({
-      name: 'registerForm'
+      name: 'loginForm'
     });
   }
 

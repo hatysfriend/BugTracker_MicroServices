@@ -20,14 +20,14 @@ const routes = [
   },
   {
     path: '/',
-    name: 'login',
     component: Login,
     children: [{
       path: '/register', name: 'registerForm', component: RegisterForm, props: true
     },
     {
       path: '/', name: 'loginForm', component: LoginForm, props: true
-    }]
+    },
+    ]
   },
 ];
 
@@ -38,7 +38,6 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (!to.meta.middleware) {
-    console.log('We will continue');
     return next();
   }
 

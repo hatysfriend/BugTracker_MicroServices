@@ -2,14 +2,14 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import jwtserializer from './jwt-serializer';
-// this is vuex thomas i set it up
-// Berry Nice
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     user: {
-      loggedIn: false
+      loggedIn: false,
+      token: undefined
     }
   },
   getters: {
