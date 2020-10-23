@@ -5,7 +5,7 @@ import LoginForm from '../components/LoginForm.vue';
 import RegisterForm from '../components/RegisterForm.vue';
 import Main from '../Main.vue';
 import authCheck from './middleware';
-import store from '../scripts/store';
+import store from '../store';
 
 Vue.use(VueRouter);
 

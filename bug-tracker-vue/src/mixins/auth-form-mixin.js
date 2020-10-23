@@ -5,6 +5,16 @@ export default {
       default: false
     }
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.status.loggedIn;
+    }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push('main');
+    }
+  },
   data() {
     return {
       user: {

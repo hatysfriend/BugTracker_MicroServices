@@ -15,5 +15,9 @@ export default {
   },
   getRefresh: () => {
     return localStorage.getItem(refreshKey);
+  },
+  removeData: () => {
+    localStorage.removeItem(tokenKey);
+    localStorage.removeItem(refreshKey);
   }
 };

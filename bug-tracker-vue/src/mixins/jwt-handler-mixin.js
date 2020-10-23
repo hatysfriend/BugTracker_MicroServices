@@ -1,62 +1,14 @@
-import jwtserializer from '../scripts/jwt-serializer';
+import store from '../store/index';
 
 export default {
-  data() {
-    return {
-      jwt: undefined
-    };
-  },
   computed: {
     jwtData() {
-      if (this.jwt) {
-        const data = JSON.parse(atob(this.jwt.split('.')[1]));
+      const jwt = store.state.user;
+      if (jwt) {
+        const data = JSON.parse(atob(jwt.split('.')[1]));
         return data;
       }
       return {};
     }
   },
-  async created() {
-    await this.fetchJWT();
-  },
-  methods: {
-    async getJwt() {
-      await this.fetchJWT();
-      return this.jwt;
-    },
-    async fetchJWT() {
-      const jwt = jwtserializer.getJwt();
-      const result = await this.checkAccessTokenIsExpired(jwt);
-      console.log(`TOKEN RESULT${result}`);
-      if (result) {
-        jwtserializer.storeJwt(result.accessToken);
-        this.jwt = result.accessToken;
-      } else {
-        this.jwt = jwt;
-      }
-    },
-    async getRefreshToken() {
-      const token = jwtserializer.getRefresh();
-      const res = await fetch('http://localhost:3002/auth/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          token
-        })
-      });
-      const dataReturn = await res.json();
-      return dataReturn;
-    },
-    async checkAccessTokenIsExpired(jwt) {
-      const data = JSON.parse(atob(jwt.split('.')[1]));
-      const expiryTime = new Date(data.exp * 1000);
-      const currentTime = new Date();
-      console.log(`expiry TIme: ${expiryTime}  Current Time: ${currentTime}`);
-      console.log((expiryTime - currentTime));
-      if ((expiryTime - currentTime) < 60000) {
-        return this.getRefreshToken();
-      }
-    }
-  }
 };

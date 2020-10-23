@@ -8,7 +8,7 @@
       <div class="field">
         <input type="password" name="password" class="input" placeholder="Enter password" v-model="user.password" @keydown="resetMessage"/>
       </div>
-      <button value="Register" class="button is-primary is-fullwidth mt-5 mb-5" @click="register">Register</button>
+      <button value="Register" class="button is-primary is-fullwidth mt-5 mb-5" @click="handleRegister">Register</button>
       <router-link :to="{name: 'loginForm', params: { isAnimated: false }}">
         <a @click="emitAnimationData" class="hover-light">Already have an account?</a>
       </router-link>
@@ -23,28 +23,19 @@ export default {
   name: 'RegisterFormComponent',
   mixins: [authformmixin],
   methods: {
-    async register() {
-      fetch('http://localhost:3002/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: this.user.username,
-          password: this.user.password,
-        }),
-      })
-        .then((res) => {
-          res.json().then(() => {
-            this.$router.push({ path: 'login' });
-            this.resetForm();
-          });
+    handleRegister() {
+      console.log('Just Once');
+      this.$store.dispatch('register', this.user)
+        .then(() => {
+          this.$router.push({ name: 'loginForm' });
+          this.resetForm();
         })
         .catch((err) => {
+          console.log(err);
           this.resetForm();
-          console.log(JSON.stringify(err));
-        // if(err.errMsg)
-        // this.setMessage(err.errMsg);
+          this.setMessage('That Username Is Already Taken');
         });
-    },
+    }
   },
 };
 </script>

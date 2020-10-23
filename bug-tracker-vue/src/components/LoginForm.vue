@@ -22,7 +22,7 @@
           @keydown="resetMessage"
         />
       </div>
-      <button class="button is-primary is-fullwidth mt-5 mb-5" @click="login">
+      <button class="button is-primary is-fullwidth mt-5 mb-5" @click="handleLogin">
         Login
       </button>
       <router-link
@@ -37,38 +37,29 @@
 </template>
 
 <script>
-import jwtserializer from '../scripts/jwt-serializer';
 import authformmixin from '../mixins/auth-form-mixin';
-import store from '../scripts/store';
 
 export default {
   name: 'LoginFormComponent',
   mixins: [authformmixin],
+  data() {
+    return {
+      loading: false
+    };
+  },
   methods: {
-    async login() {
-      fetch('http://localhost:3002/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: this.user.username,
-          password: this.user.password,
-        }),
-      })
-        .then((res) => {
-          res.json().then((data) => {
-            console.log(data);
-            this.resetForm();
-            jwtserializer.storeJwt(data.accessToken);
-            jwtserializer.storeRefresh(data.refreshToken);
-            store.commit('setLoggedInStatus', true);
-            this.$router.push({ name: 'main' });
-          });
+    handleLogin() {
+      this.loading = true;
+      this.$store.dispatch('login', this.user)
+        .then(() => {
+          this.$router.push({ name: 'main' });
         })
         .catch(() => {
+          this.loading = false;
           this.resetForm();
-          this.setMessage('Something Went Wrong, Try Again!');
+          this.setMessage('Something Went Wrong, Please Try Again');
         });
-    },
+    }
   },
 };
 </script>

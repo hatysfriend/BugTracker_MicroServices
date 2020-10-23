@@ -18,7 +18,9 @@
 
     <div class="navbar-item mr-2">
       <div class="buttons">
-        <a class="button is-small is-danger is-outlined"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
+        <a @click="logoutHandler" class="button is-small is-danger is-outlined">
+          <i class="fas fa-sign-out-alt mr-1"></i>Logout
+        </a>
       </div>
     </div>
   </div>
@@ -38,6 +40,14 @@ export default {
       required: true
     }
   },
+  methods: {
+    logoutHandler() {
+      this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push({ name: 'loginForm' });
+        });
+    }
+  }
 };
 </script>
 

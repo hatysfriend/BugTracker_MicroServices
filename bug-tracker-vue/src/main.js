@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { Vue2Dragula } from 'vue2-dragula';
 import App from './App.vue';
-import store from './scripts/store';
+import store from './store';
 
 import router from './router/routes';
 

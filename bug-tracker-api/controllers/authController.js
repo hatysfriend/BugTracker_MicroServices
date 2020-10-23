@@ -17,11 +17,13 @@ const generateRefreshToken = (user) => {
 module.exports = {
   register_a_user_post: async (req, res) => {
     const user = await authHelper.createEncryptedUser(req.body.username, req.body.password);
-    console.log('trash');
+    console.log(`trash${req.body.username}`);
     repo.InsertUser(user)
       .then(() => {
+        console.log('Authenticatus');
         authenticator.authenticate(req.body.username, req.body.password)
           .then((userReturn) => {
+            console.log('Success');
             res.status(201);
             res.json({
               message: 'Registration Succesful',
@@ -29,6 +31,7 @@ module.exports = {
             });
           })
           .catch((err) => {
+            console.log(`Failure${err}`);
             res.status(500).send({ error: err });
           });
       })
@@ -38,9 +41,9 @@ module.exports = {
           errMsg = 'That Username Is Already Taken';
           res.status(500).send(errMsg);
         }
-        res.status(500).send();
+        // res.status(500).send(errMsg);
         // eslint-disable-next-line no-console
-        console.log(`ERROR:${errMsg}`);
+        // console.log(`ERROR:${errMsg}`);
       });
   },
 
