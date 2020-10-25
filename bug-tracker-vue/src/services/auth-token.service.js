@@ -6,7 +6,6 @@ const checkAccessTokenIsExpired = async (jwt) => {
   const data = JSON.parse(atob(jwt.split('.')[1]));
   const expiryTime = new Date(data.exp * 1000);
   const currentTime = new Date();
-  console.log(`expiry TIme: ${expiryTime}  Current Time: ${currentTime}`);
   console.log((expiryTime - currentTime));
   if ((expiryTime - currentTime) < 60000) {
     return true;
@@ -19,7 +18,7 @@ const getRefreshToken = async () => {
   return new Promise((resolve, reject) => {
     const token = jwtserializer.getRefresh();
     if (!token) {
-      return reject();
+      return reject(new Error('No Refresh Token In Local Storage'));
     }
 
     axios
@@ -30,7 +29,6 @@ const getRefreshToken = async () => {
         resolve(res.data.accessToken);
       })
       .catch((err) => {
-        console.log('here??');
         reject(err);
       });
   });
@@ -42,24 +40,24 @@ export default async function token() {
   return new Promise((resolve, reject) => {
     (async () => {
       if (!token) {
-        console.log('No Token Found');
-        return reject();
+        console.log('No Token In Local Storage');
+        return reject(new Error('No Token In Local Storage'));
       }
 
       const isExpired = await checkAccessTokenIsExpired(token);
       if (isExpired) {
-        console.log('Token Was Expired, Now Attempting Refresh');
+        console.log('Token Expired, Attempting Refresh');
         getRefreshToken()
           .then((token) => {
-            console.log('Resolved!');
+            console.log('Token Refreshed');
             resolve(token);
           })
           .catch((err) => {
-            console.log('Rejected!');
+            console.log('Token Could Not Be Refreshed');
             reject(err);
           });
       } else {
-        console.log(`Token Ok!${token}`);
+        console.log(`Token Valid ${token}`);
         resolve(token);
       }
     })();

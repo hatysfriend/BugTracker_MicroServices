@@ -98,7 +98,6 @@ export default {
       bugDataService.getAll()
         .then((res) => {
           res.json().then((data) => {
-            console.log(JSON.stringify(data));
             this.bugs = data;
             this.sortBugs();
           });

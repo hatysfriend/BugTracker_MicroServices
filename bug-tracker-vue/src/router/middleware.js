@@ -2,7 +2,8 @@ import store from '../store/index';
 
 export default function authCheck({ next }) {
   store.dispatch('getToken')
-    .catch(() => {
+    .catch((err) => {
+      console.log(err.message);
     })
     .finally(() => {
       if (!store.state.status.loggedIn) {
@@ -15,5 +16,4 @@ export default function authCheck({ next }) {
       console.log('Middleware Passthru');
       return next();
     });
-  console.log('Nada?');
 }

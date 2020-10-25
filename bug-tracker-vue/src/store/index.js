@@ -1,5 +1,5 @@
 /* eslint-disable space-before-function-paren */
-/* eslint-disable no-shadow */
+
 /* eslint-disable no-param-reassign */
 import Vue from 'vue';
 import Vuex from 'vuex';
@@ -22,19 +22,19 @@ export default new Vuex.Store({
       AuthService.logout();
       commit('logout');
     },
-    login({ commit }, user) {
-      return AuthService.login(user)
-        .then((user) => {
-          commit('loginSuccess', user);
-          return Promise.resolve(user);
+    login({ commit }, userInput) {
+      return AuthService.login(userInput)
+        .then((userReturn) => {
+          commit('loginSuccess', userReturn);
+          return Promise.resolve(userReturn);
         })
         .catch((err) => {
           commit('loginFailure');
           return Promise.reject(err);
         });
     },
-    register({ commit }, user) {
-      return AuthService.register(user)
+    register({ commit }, userInput) {
+      return AuthService.register(userInput)
         .then((res) => {
           commit('registerSuccess');
           return Promise.resolve(res);
@@ -48,25 +48,22 @@ export default new Vuex.Store({
       return TokenService()
         .then((token) => {
           commit('updateUser', token);
-          console.log(`Token In State!${token}`);
           return Promise.resolve(token);
         })
-        .catch(() => {
-          console.log('login failure!!!!');
+        .catch((err) => {
           commit('loginFailure');
-          // eslint-disable-next-line prefer-promise-reject-errors
-          return Promise.reject();
+          return Promise.reject(err);
         });
     }
   },
   mutations: {
-    updateUser(state, user) {
-      jwtserializer.storeJwt(user);
-      state.user = user;
+    updateUser(state, userInput) {
+      jwtserializer.storeJwt(userInput);
+      state.user = userInput;
     },
-    loginSuccess(state, user) {
+    loginSuccess(state, userInput) {
       state.status.loggedIn = true;
-      state.user = user;
+      state.user = userInput;
     },
     loginFailure(state) {
       state.status.loggedIn = false;
