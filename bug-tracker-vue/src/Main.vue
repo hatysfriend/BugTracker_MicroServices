@@ -120,8 +120,8 @@ export default {
       this.loading = false;
     },
   },
-  created() {
-    this.getBugs();
+  async created() {
+    await this.getBugs();
     this.$dragula.createService({
       name: 'itemsService',
       drakes: {

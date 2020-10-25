@@ -12,7 +12,8 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push('main');
+      this.$router.push('main')
+        .catch(console.log('POO'));
     }
   },
   data() {

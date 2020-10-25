@@ -5,6 +5,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import AuthService from '../services/auth.service';
 import jwtserializer from '../scripts/jwt-serializer';
+import TokenService from '../services/auth-token.service';
 
 Vue.use(Vuex);
 
@@ -24,7 +25,6 @@ export default new Vuex.Store({
     login({ commit }, user) {
       return AuthService.login(user)
         .then((user) => {
-          console.log(`USER HEREEEE!!!!${user}`);
           commit('loginSuccess', user);
           return Promise.resolve(user);
         })
@@ -43,6 +43,20 @@ export default new Vuex.Store({
           commit('registerFailure');
           return Promise.reject(err);
         });
+    },
+    getToken({ commit }) {
+      return TokenService()
+        .then((token) => {
+          commit('updateUser', token);
+          console.log(`Token In State!${token}`);
+          return Promise.resolve(token);
+        })
+        .catch(() => {
+          console.log('login failure!!!!');
+          commit('loginFailure');
+          // eslint-disable-next-line prefer-promise-reject-errors
+          return Promise.reject();
+        });
     }
   },
   mutations: {
@@ -57,6 +71,7 @@ export default new Vuex.Store({
     loginFailure(state) {
       state.status.loggedIn = false;
       state.user = null;
+      jwtserializer.removeData();
     },
     logout(state) {
       state.status.loggedIn = false;
