@@ -13,6 +13,7 @@
 
   <div class="navbar-end">
     <div class="navbar-item mr-2">
+      <Badge :name="username"/>
       <div>Hi {{ username }}!</div>
     </div>
 
@@ -29,9 +30,11 @@
 
 <script>
 // import SocialLinks from './SocialLinks.vue';
+import Badge from './Badge.vue';
 
 export default {
   components: {
+    Badge
     // SocialLinks
   },
   props: {
