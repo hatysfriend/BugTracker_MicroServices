@@ -7,6 +7,7 @@
           <div class="column">
             <h5 class="notification is-danger">Created</h5>
             <div
+              id="Created"
               class="container"
               v-dragula="colOne"
               service="itemsService"
@@ -16,7 +17,7 @@
                 <Loading />
               </div>
               <div v-for="bug in createdBugs" :key="bug._id">
-                <BugCard :bug="bug" />
+                <BugCard :bug="bug" :bugId="bug._id" :status="bug.status"/>
               </div>
             </div>
             <button class="buttton is-primary">+ Add Another Card</button>
@@ -25,6 +26,7 @@
           <div class="column">
             <h5 class="notification is-warning">In-Progress</h5>
             <div
+              id="In-Progress"
               class="container"
               v-dragula="colTwo"
               service="itemsService"
@@ -34,7 +36,7 @@
                 <Loading />
               </div>
               <div v-for="bug in inProgressBugs" :key="bug._id">
-                <BugCard :bug="bug" />
+                <BugCard :bug="bug" :bugId="bug._id" :status="bug.status"/>
               </div>
             </div>
             <button class="buttton is-primary">+ Add Another Card</button>
@@ -43,6 +45,7 @@
           <div class="column">
             <h5 class="notification is-success">Fixed</h5>
             <div
+              id="Fixed"
               class="container"
               v-dragula="colThree"
               service="itemsService"
@@ -52,7 +55,7 @@
                   <Loading />
               </div>
               <div v-for="bug in fixedBugs" :key="bug._id">
-                <BugCard :bug="bug" />
+                <BugCard :bug="bug" :bugId="bug._id" :status="bug.status"/>
               </div>
             </div>
             <button class="buttton is-primary">+ Add Another Card</button>
@@ -119,6 +122,15 @@ export default {
       });
       this.loading = false;
     },
+    updateState(args) {
+      const bugId = args.el.querySelector('.card').getAttribute('bugid');
+      const bug = this.bugs.find(x => x._id === bugId);
+      bug.status = args.target.id;
+      const updateBug = {
+        status: args.target.id
+      };
+      bugDataService.updateStatus(bugId, updateBug);
+    }
   },
   created() {
     this.getBugs();
@@ -126,16 +138,8 @@ export default {
       name: 'itemsService',
       drakes: {
         items: {
-          moves: (el, source, handle, sibling) => {
-            console.log(
-              `${el} ${JSON.stringify(source)} ${JSON.stringify(
-                handle
-              )} ${JSON.stringify(sibling)}`
-            );
-            return true;
-          },
           dropModel: (name, el, source, target) => {
-            console.log(`Source ${source} Target: ${target}`);
+            console.log(`Source ${source} Target: ${target} Element:${el}`);
           },
         },
       },
@@ -145,6 +149,7 @@ export default {
     const { $service } = this.$dragula;
     $service.eventBus.$on('dropModel', (args) => {
       console.log(args);
+      this.updateState(args);
     });
   },
 };
