@@ -2,10 +2,12 @@
 import axios from 'axios';
 import jwtserializer from '../scripts/jwt-serializer';
 
+const API_URL = 'http://localhost:3002/auth/';
+
 class AuthService {
   login(user) {
     return axios
-      .post('http://localhost:3002/auth/login', {
+      .post(`${API_URL}login`, {
         username: user.username,
         password: user.password
       })
@@ -20,20 +22,17 @@ class AuthService {
 
   register(user) {
     return axios
-      .post('http://localhost:3002/auth/register', {
+      .post(`${API_URL}register`, {
         username: user.username,
         password: user.password,
       });
   }
 
   logout() {
-    return fetch('http://localhost:3002/auth/logout', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    return axios
+      .delete(`${API_URL}logout`, {
         token: jwtserializer.getRefresh()
-      }),
-    })
+      })
       .then(() => {
         jwtserializer.removeData();
       });

@@ -101,7 +101,6 @@ export default {
       bugDataService.getAll()
         .then((res) => {
           res.json().then((data) => {
-            console.log(JSON.stringify(data));
             this.bugs = data;
             this.sortBugs();
           });
@@ -132,8 +131,8 @@ export default {
       bugDataService.updateStatus(bugId, updateBug);
     }
   },
-  created() {
-    this.getBugs();
+  async created() {
+    await this.getBugs();
     this.$dragula.createService({
       name: 'itemsService',
       drakes: {
