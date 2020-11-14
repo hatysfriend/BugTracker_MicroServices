@@ -31,7 +31,9 @@ class AuthService {
   logout() {
     return axios
       .delete(`${API_URL}logout`, {
-        token: jwtserializer.getRefresh()
+        data: {
+          token: jwtserializer.getRefresh()
+        }
       })
       .then(() => {
         jwtserializer.removeData();

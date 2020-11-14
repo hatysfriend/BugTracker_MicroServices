@@ -7,7 +7,7 @@ const tokenRepo = require('../data/tokenRepository');
 require('dotenv').config();
 
 const generateAccessToken = (user) => {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '160s' });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '120s' });
 };
 
 const generateRefreshToken = (user) => {

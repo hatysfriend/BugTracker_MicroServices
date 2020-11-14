@@ -49,6 +49,7 @@ module.exports = {
   update_bug: (req, res) => {
     const { id } = req.params;
     const bug = req.body;
+    console.log(`Bug${JSON.stringify(bug)}`);
     repository
       .UpdateBug(id, bug)
       .then((data) => {

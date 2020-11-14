@@ -1,0 +1,65 @@
+.logo {
+  max-width: 250px;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+
+.start-opaque {
+  opacity: 0;
+}
+
+// Long Blur Animation
+@keyframes blur-anim {
+  0% {
+    filter: blur(3px);
+    opacity: 0.3;
+  }
+}
+
+.blur-anim {
+  animation: blur-anim 1.6s linear backwards;
+}
+
+// Short Blur Animation
+@keyframes blur-anim {
+  0% {
+    filter: blur(1px);
+    opacity: 0.3;
+  }
+}
+
+.blur-short-anim {
+  animation: blur-anim 0.5s linear backwards;
+}
+
+// Form Fade In Animation
+@keyframes form-anim {
+  0% {
+    filter: blur(3px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in-anim {
+  animation: form-anim 0.2s 1.25s ease-in forwards;
+}
+
+// Logo Move And Shrink Animation
+@keyframes logo-anim {
+  0% {
+    filter: blur(5px);
+    max-width: 500px;
+  }
+  50% {
+    filter: blur(0px);
+    max-width: 500px;
+  }
+}
+
+.logo-animation {
+  animation: logo-anim 1.3s ease-in;
+}

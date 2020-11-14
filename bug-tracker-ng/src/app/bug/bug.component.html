@@ -1,0 +1,51 @@
+<div>
+    <div *ngIf="user$ | async as user">
+      <app-navbar [username]="user.username"></app-navbar>
+      <div id="main">
+        <div cdkDropListGroup class="columns" id="containerGroup">
+          <div class="column">
+            <h5 class="notification is-danger">Created</h5>
+            <div (cdkDropListDropped)="dropped($event)" cdkDropList id="Created" [cdkDropListData]="createdBugs" class="container">
+              <div *ngIf="loading">
+                Loading...
+              </div>
+              <div cdkDrag *ngFor="let bug of createdBugs" [attr.bugid]="bug._id">
+                <div>
+                  <app-bug-card [bug]="bug" ></app-bug-card>
+                </div>
+              </div>
+            </div>
+            <button class="buttton is-primary">+ Add Another Card</button>
+          </div>
+
+          <div class="column">
+            <h5 class="notification is-warning">In-Progress</h5>
+            <div (cdkDropListDropped)="dropped($event)" cdkDropList id="In-Progress" [cdkDropListData]="inProgressBugs" class="container">
+              <div *ngIf="loading">
+                Loading...
+              </div>
+              <div cdkDrag *ngFor="let bug of inProgressBugs" [attr.bugid]="bug._id">
+                <app-bug-card [bug]="bug"></app-bug-card>
+              </div>
+            </div>
+            <button class="buttton is-primary">+ Add Another Card</button>
+          </div>
+
+          <div class="column">
+            <h5 class="notification is-success">Fixed</h5>
+            <div (cdkDropListDropped)="dropped($event)" cdkDropList id="Fixed" [cdkDropListData]="fixedBugs" class="container">
+              <div *ngIf="loading">
+                  Loading...
+              </div>
+              <div cdkDrag *ngFor="let bug of fixedBugs" [attr.bugid]="bug._id">
+                <app-bug-card [bug]="bug" ></app-bug-card>
+              </div>
+            </div>
+            <button class="buttton is-primary">+ Add Another Card</button>
+          </div>
+        </div>
+      </div>
+      <p>User ID: {{ user.id }}</p>
+      <p>Username: {{ user.username }}</p>
+    </div> 
+  </div>

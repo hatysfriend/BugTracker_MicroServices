@@ -1,0 +1,26 @@
+.cdk-drop-dragging .cdk-drag {
+  transition: transform 500ms cubic-bezier(0, 0, 0.2, 1);
+}
+.cdk-drag-animating {
+  transition: transform 220ms cubic-bezier(0, 0, 0.2, 1);
+}
+.cdk-drag-placeholder {
+  background: rgba(0, 0, 0, .2);
+}
+
+.notification {
+  padding: 8px;
+  font-size: small;
+  font-weight: bold;
+}
+
+.container {
+  border: solid;
+  border-width: 2px;
+  border-color: #303030;
+  background-color: #303030;
+  border-radius: 1%;
+  height: max-content;
+  min-height: 2rem;
+  padding: 10px;
+}

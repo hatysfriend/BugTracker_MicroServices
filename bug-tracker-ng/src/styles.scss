@@ -1,0 +1,29 @@
+$background-primary: #222;
+$background-secondary: #383838;
+$highlight: #666666;
+$body-background-color: $background-primary;
+$title-color: azure;
+$text: white;
+$family-primary: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+@import '~bulma/bulma';
+
+.hover-light:hover {
+  color: white;
+}
+
+.account-form {
+  display: block;
+  max-width: 27.2%;
+  min-width: 22rem;
+  margin: 0 auto;
+  position: relative;
+  background-color: #383838;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: rgba(255, 255, 255, 0.1) 0 0 2px;
+  text-align: center;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
