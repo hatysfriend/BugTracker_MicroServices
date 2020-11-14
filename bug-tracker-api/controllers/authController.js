@@ -7,7 +7,7 @@ const tokenRepo = require('../data/tokenRepository');
 require('dotenv').config();
 
 const generateAccessToken = (user) => {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '120s' });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '20s' });
 };
 
 const generateRefreshToken = (user) => {
@@ -73,11 +73,13 @@ module.exports = {
     }
     const result = await tokenRepo.GetToken(req.body.token);
     if (result == null) {
+      console.log('Unable to get Token');
       return res.sendStatus(403);
     }
 
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
       if (err) {
+        console.log('Token not valid');
         return res.sendStatus(403);
       }
       const accessToken = generateAccessToken({ id: user.id, username: user.username });

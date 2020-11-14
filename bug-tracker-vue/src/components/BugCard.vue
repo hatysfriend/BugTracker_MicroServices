@@ -4,11 +4,11 @@
     <p class="card-header-title">
       {{bug.name}}
     </p>
-    <a href="#" class="card-header-icon">
-      <span class="icon">
+    <div class="card-header-icon">
+      <span class="icon" :class="statusObject()">
         <i class="fas fa-bug" ></i>
       </span>
-    </a>
+    </div>
   </header>
   <div class="card-content">
     <div class="content">
@@ -26,7 +26,29 @@
 
 <script>
 export default {
-  props: ['bug'],
+  props: [
+    'bug',
+    'status'
+  ],
+  methods: {
+    statusObject() {
+      if (this.status === 'Created') {
+        return {
+          'has-text-danger': true
+        };
+      }
+      if (this.status === 'In-Progress') {
+        return {
+          'has-text-warning': true
+        };
+      }
+      if (this.status === 'Fixed') {
+        return {
+          'has-text-success': true
+        };
+      }
+    }
+  }
 };
 </script>
 
@@ -42,5 +64,9 @@ export default {
 }
 .card-footer {
     padding: 10px
+}
+
+.card-header-icon {
+  cursor: default !important;
 }
 </style>

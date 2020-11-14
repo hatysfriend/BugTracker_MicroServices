@@ -19,9 +19,10 @@ module.exports = {
     'comma-dangle': 'off',
     'linebreak-style': ['error', 'windows'],
     'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],
-    'arrow-body-style': ['error', 'always'],
+    'arrow-body-style': 'off',
     'consistent-return': 'off',
     'max-len': 'off',
     'no-console': 'off',
+    'arrow-parens': 'off'
   }
 };
