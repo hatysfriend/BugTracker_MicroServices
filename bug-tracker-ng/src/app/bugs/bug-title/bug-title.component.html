@@ -1,0 +1,10 @@
+<div class="block">
+  <div>
+    <div (click)="showEditTitle()" class="field">
+      <div class="control">
+        <div class="title is-5" *ngIf="!isEdit">{{bug.name}}</div>
+        <input (blur)="saveTitle()" *ngIf="isEdit" [(ngModel)]="bug.name" class="input">
+      </div>
+    </div>
+  </div>  
+</div>

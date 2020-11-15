@@ -24,3 +24,21 @@
   min-height: 2rem;
   padding: 10px;
 }
+
+@keyframes blurAnim {
+  from { filter: none };
+  to { filter: blur(2.5px)};
+}
+
+@keyframes blurAnimRev {
+  from { filter: blur(2.5px) };
+  to { filter: none };
+}
+
+.modal-open-blur {
+  animation: blurAnim 1000ms forwards cubic-bezier(0, 0, 0.2, 1);
+}
+
+.modal-close-blur {
+  animation: blurAnimRev 800ms forwards cubic-bezier(0, 0, 0.2, 1);
+}

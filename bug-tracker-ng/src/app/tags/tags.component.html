@@ -1,0 +1,5 @@
+<div class="tags">
+  <span *ngFor="let tag of tags">
+    <span class="mx-1 tag" [class]="setTagColour(tag.colour)">{{tag.name}}</span>
+  </span>
+</div>

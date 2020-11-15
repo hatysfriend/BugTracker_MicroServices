@@ -1,0 +1,16 @@
+<div class="block">
+  <div >
+    <div (click)="showEditDesc()" class="field">
+      <label class="label">
+        <span class="icon">
+          <fa-icon [icon]="faList" class="mr-1"></fa-icon>
+        </span>
+        Description
+      </label>
+      <div class="control">
+        <div *ngIf="!isEdit">{{bug.description}}</div>
+        <textarea (blur)="saveDesc()" *ngIf="isEdit" [(ngModel)]="bug.description" class="textarea"></textarea>
+      </div>
+    </div>
+  </div>  
+</div>

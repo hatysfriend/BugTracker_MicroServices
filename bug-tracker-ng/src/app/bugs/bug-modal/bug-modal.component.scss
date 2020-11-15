@@ -1,0 +1,23 @@
+@import '../../../styles.scss';
+.modal-background {
+  background-color: rgba(0, 0, 0, 0.301);
+}
+
+.bg {
+  filter: blur(5px);
+}
+
+.modal-card-head, .modal-card-foot, .modal-card-title {
+  background-color: $background-secondary;
+  color: $title-color;
+  border-color: $background-secondary;
+}
+
+.modal-card-body {
+  background-color: $background-primary;
+  border-color: black;
+}
+
+hr {
+  background-color: rgb(75, 75, 75);
+}

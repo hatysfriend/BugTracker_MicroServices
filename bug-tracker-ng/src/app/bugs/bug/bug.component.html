@@ -1,10 +1,10 @@
-<div>
+<div [class]="{'modal-open-blur': modalOpen$ | async, 'modal-close-blur': (modalOpen$ | async) === false}">
     <div *ngIf="user$ | async as user">
       <app-navbar [username]="user.username"></app-navbar>
       <div id="main">
         <div cdkDropListGroup class="columns" id="containerGroup">
           <div class="column">
-            <h5 class="notification is-danger">Created</h5>
+            <h3 class="notification is-danger">Created</h3>
             <div (cdkDropListDropped)="dropped($event)" cdkDropList id="Created" [cdkDropListData]="createdBugs" class="container">
               <div *ngIf="loading">
                 Loading...
@@ -15,11 +15,16 @@
                 </div>
               </div>
             </div>
-            <button class="buttton is-primary">+ Add Another Card</button>
+            <button class="button is-small is-fullwidth is-primary">
+              <span class="icon is-small">
+                <fa-icon [icon]="faPlus"></fa-icon>
+              </span>
+              <span><strong>Add New Card</strong></span>
+            </button>
           </div>
 
           <div class="column">
-            <h5 class="notification is-warning">In-Progress</h5>
+            <h3 class="notification is-warning">In-Progress</h3>
             <div (cdkDropListDropped)="dropped($event)" cdkDropList id="In-Progress" [cdkDropListData]="inProgressBugs" class="container">
               <div *ngIf="loading">
                 Loading...
@@ -28,11 +33,16 @@
                 <app-bug-card [bug]="bug"></app-bug-card>
               </div>
             </div>
-            <button class="buttton is-primary">+ Add Another Card</button>
+            <button class="button is-small is-fullwidth is-primary">
+              <span class="icon is-small">
+                <fa-icon [icon]="faPlus"></fa-icon>
+              </span>
+              <span><strong>Add New Card</strong></span>
+            </button>
           </div>
 
           <div class="column">
-            <h5 class="notification is-success">Fixed</h5>
+            <h3 class="notification is-success">Fixed</h3>
             <div (cdkDropListDropped)="dropped($event)" cdkDropList id="Fixed" [cdkDropListData]="fixedBugs" class="container">
               <div *ngIf="loading">
                   Loading...
@@ -41,7 +51,12 @@
                 <app-bug-card [bug]="bug" ></app-bug-card>
               </div>
             </div>
-            <button class="buttton is-primary">+ Add Another Card</button>
+            <button class="button is-small is-fullwidth is-primary">
+              <span class="icon is-small">
+                <fa-icon [icon]="faPlus"></fa-icon>
+              </span>
+              <span><strong>Add New Card</strong></span>
+            </button>
           </div>
         </div>
       </div>
@@ -49,3 +64,5 @@
       <p>Username: {{ user.username }}</p>
     </div> 
   </div>
+
+  <router-outlet></router-outlet>

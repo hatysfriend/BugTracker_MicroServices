@@ -1,0 +1,32 @@
+<div class="card">
+  <header class="card-header">
+    <a class="card-header-icon">
+      <span class="icon" [class]="setBugColour()">
+        <fa-icon [icon]="faBug" class="fa-2x"></fa-icon>
+      </span>
+    </a>
+    <div class="container has-text-right mt-2 mr-2">
+      <button (click)="handleEditClick()" class="button is-small" align="right">
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </button>
+    </div>
+  </header>
+  <div class="block">
+    <br />
+  <div class="block mx-2">
+    <app-tags [tags]="bug.tags"></app-tags>
+  </div>
+  <h2 class="card-header-title">
+    {{ bug.name | titlecase }}
+  </h2>
+  </div>
+  <footer class="card-footer">
+    <span class="icon">
+      <fa-icon [icon]="faComment"></fa-icon>
+    </span>
+    {{ bug.comments.length }}
+    <span class="container has-text-right"> 
+      <time datetime="2016-1-1">{{ bug.date | date }}</time>
+    </span>
+  </footer>
+</div>

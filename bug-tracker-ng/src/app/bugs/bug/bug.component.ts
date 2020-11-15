@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Bug } from '../models/bug';
+import { Bug } from '../../models/bug';
 import { BugService } from './bug.service';
-import { UserService } from './../shared/user.service';
+import { UserService } from '../../shared/user.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Observable } from 'rxjs';
+import { BugModalStateService } from '../../bug-modal-state.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-bug',
@@ -14,21 +17,29 @@ export class BugComponent implements OnInit {
   inProgressBugs: Bug[] = [];
   fixedBugs: Bug[] = [];
   loading: boolean = false;
+  modalOpen$: Observable<boolean>
 
-  constructor(private bugService: BugService, private userService: UserService) { }
+  faPlus = faPlus;
+
+  constructor(private bugService: BugService, private userService: UserService, private bugModalService: BugModalStateService) { }
 
   user$ = this.userService.getUser();
 
   ngOnInit(): void {
-    this.bugService.getAllBugs().subscribe((data) => {
+    this.modalOpen$ = this.bugModalService.getModalState();
+
+    this.bugService.bugs$.subscribe((data) => {
       data.forEach(bug => {
         if(bug.status === 'Created'){
+          this.createdBugs = [];
           this.createdBugs.push(bug);
         }
         if(bug.status === 'In-Progress'){
+          this.inProgressBugs = [];
           this.inProgressBugs.push(bug);
         }
         if(bug.status === 'Fixed'){
+          this.fixedBugs = [];
           this.fixedBugs.push(bug);
         }
       });

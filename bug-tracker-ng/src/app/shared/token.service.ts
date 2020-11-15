@@ -73,7 +73,7 @@ export class TokenService {
         this.setAccessToken(data.accessToken);
         return data.accessToken
       }),
-      catchError(err => this.router.navigate(['auth/login']))
+      catchError(() => this.router.navigate(['auth/login']))
     );
   }
 }
