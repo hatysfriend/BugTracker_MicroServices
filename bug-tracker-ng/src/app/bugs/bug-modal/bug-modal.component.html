@@ -3,8 +3,12 @@
   <div class="modal-card">
     <header class="modal-card-head">
       <app-bug-title [bug]="bug"></app-bug-title>
-      <div class="container has-text-right"> 
-        <button (click)="closeModal()" class="delete" aria-label="close"></button>
+      <div class="container has-text-right">
+        <button
+          (click)="closeModal()"
+          class="delete"
+          aria-label="close"
+        ></button>
       </div>
     </header>
     <section class="modal-card-body">
@@ -13,18 +17,24 @@
           <fa-icon [icon]="faBug" class="fa-2x mr-3"></fa-icon>
         </span>
         <h1 class="title is-5 column is-1">
-          {{bug.status}}
+          {{ bug.status }}
         </h1>
       </div>
-      <hr>
+      <hr />
       <div class="block">
         <app-tags [tags]="bug.tags"></app-tags>
       </div>
       <app-bug-desc [bug]="bug"></app-bug-desc>
-      </section>
-    <footer class="modal-card-foot">
-      <button class="button is-success">Save changes</button>
-      <button class="button">Cancel</button>
-    </footer>
+      <br>
+      <app-comment-entry [bugId]="bug._id"></app-comment-entry>
+      <app-comment-list [bug]="bug"></app-comment-list>
+      <div *ngIf="user$ | async as user" class="level">
+        <div class="level-left">{{user.username | titlecase}}</div>
+        <div class="level-right">{{bug.date | date}}</div>
+      </div>
+      <div class="level">
+        <button class="button is-danger">Archive</button>
+      </div>
+    </section>
   </div>
 </div>

@@ -37,6 +37,7 @@ module.exports = {
     const token = authHeader && authHeader.split(' ')[1];
 
     if (token == null) {
+      console.log('Token Was Null!');
       return res.sendStatus(401);
     }
 

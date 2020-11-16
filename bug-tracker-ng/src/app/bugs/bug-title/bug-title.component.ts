@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Bug } from 'src/app/models/bug';
-import { BugService } from '../bug/bug.service';
+import { BugService } from '../bug.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -26,7 +26,7 @@ export class BugTitleComponent implements OnInit, OnDestroy{
 
   saveTitle() {
     this.isEdit = false;
-    if (this.bug.name.length === 0) {
+    if (this.bug.name.trim().length === 0) {
       this.bug.name = this.originalTitle;
     }
     const update = {

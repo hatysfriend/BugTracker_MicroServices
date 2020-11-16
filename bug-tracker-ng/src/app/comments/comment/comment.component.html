@@ -1,0 +1,31 @@
+<article class="message">
+  <div class="message-body">
+    <div class="columns is-mobile">
+      <div class="column is-1">
+        <div class="tag is-primary mr-3"><strong>{{comment.user.username.charAt(0) | titlecase}}</strong></div>
+      </div>
+      <div class="column">
+        {{comment.user.username | titlecase}}
+      </div>
+      <div class="level-right comment-date">
+        commented 4 hours ago
+      </div>
+    </div>
+
+    <div class="columns is-mobile">
+      <div class="column is-1">
+          <span class="icon has-text-primary mr-3">
+            <fa-icon [icon]="faCaretUp" class="fa-2x"></fa-icon>
+          </span>
+        <div>
+          {{999}}
+        </div>
+      </div>
+      <div class="column">
+        <div class="comment-body">
+          {{comment.comment}}
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

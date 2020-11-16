@@ -1,0 +1,26 @@
+@import '../../../styles.scss';
+
+.message {
+  min-height: fit-content;
+  resize: none;
+  background: rgb(69, 68, 71);
+  color: white;
+  // border: 0 grey;
+  // margin-right: 4%;
+}
+
+.comment-date {
+  font-size: smaller;
+}
+
+.comment-body {
+  background: rgb(87, 86, 90);
+  word-wrap: normal;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.icon:hover {
+  cursor: pointer;
+  color: lighten($color: $primary, $amount: 20%) !important;
+}

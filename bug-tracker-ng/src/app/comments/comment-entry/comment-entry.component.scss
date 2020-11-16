@@ -1,0 +1,28 @@
+textarea {
+  resize: none;
+  min-height: 10px;
+}
+
+.commentTextAreaWithSaveButton {
+  padding-bottom: 48px;
+}
+
+.comment-controls {
+  position: relative;
+  bottom: 45px;
+  margin-left: 2%;
+}
+
+.comment-icons {
+  position: relative;
+  align-items: center;
+  text-align: center;
+}
+
+.level {
+  align-items: flex-end;
+}
+
+.spacer {
+  height: 30px;
+}

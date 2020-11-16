@@ -1,4 +1,4 @@
-export interface Comment {
+export interface CommentRequest {
   comment: string,
   user?: string,
   likes?: [

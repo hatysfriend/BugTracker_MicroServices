@@ -1,0 +1,21 @@
+<div class="form-group">
+  <label for="commentsEntry"><span class="icon has-text-primary">
+    <fa-icon [icon]="faComment" class="mx-1"></fa-icon>
+  </span> Comments </label><br>
+  <div (blur)="hideControls()">
+      <textarea (click)="showControls()" class="textarea" [(ngModel)]="comment" placeholder="Write a comment..."></textarea>
+      <div *ngIf="controlsVisible" class="level is-mobile comment-controls">
+          <button (click)="saveComment()" id="commentSaveButton" class="button is-success is-small level-left" [disabled]="saveDisabled()">Save</button>
+          <div class="comment-icons level-right mr-3">
+            <a href="#">
+              <span class="icon has-text-primary">
+                <fa-icon [icon]="faPaperclip" class="mx-1"></fa-icon>
+              </span>
+            </a>
+          </div>
+      </div>
+      <div *ngIf="!controlsVisible">
+        <div class="spacer">
+        </div>
+      </div>
+</div>

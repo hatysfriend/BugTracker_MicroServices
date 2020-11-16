@@ -1,4 +1,4 @@
-import { Comment } from './comment';
+import { CommentRequest } from './commentRequestModel';
 
 export interface Bug {
   _id?: string, 
@@ -11,6 +11,6 @@ export interface Bug {
     colour: string
   ],
   date?: Date,
-  comments?: Comment[],
+  comments?: CommentRequest[],
   archived?: boolean
 };

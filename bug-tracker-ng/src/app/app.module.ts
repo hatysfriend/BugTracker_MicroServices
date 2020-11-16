@@ -28,12 +28,16 @@ import { TokenService } from './shared/token.service';
 import { AuthHeaderService } from './shared/auth-header.service';
 import { UserService } from './shared/user.service';
 import { BugModalStateService } from './bug-modal-state.service';
+import { CommentService } from './comments/comment.service';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TagsComponent } from './tags/tags.component';
 import { TagEntryComponent } from './tag-entry/tag-entry.component';
+import { CommentComponent } from './comments/comment/comment.component';
+import { CommentEntryComponent } from './comments/comment-entry/comment-entry.component';
+import { CommentListComponent } from '../app/comments/comment-list/comment-list.component';
 
 
 
@@ -51,7 +55,10 @@ import { TagEntryComponent } from './tag-entry/tag-entry.component';
     TagsComponent,
     TagEntryComponent,
     BugDescComponent,
-    BugTitleComponent
+    BugTitleComponent,
+    CommentComponent,
+    CommentEntryComponent,
+    CommentListComponent
   ],
   imports: [
     DragDropModule,
@@ -71,7 +78,8 @@ import { TagEntryComponent } from './tag-entry/tag-entry.component';
     BugService,
     AuthHeaderService,
     UserService,
-    BugModalStateService
+    BugModalStateService,
+    CommentService
   ],
   bootstrap: [AppComponent]
 })

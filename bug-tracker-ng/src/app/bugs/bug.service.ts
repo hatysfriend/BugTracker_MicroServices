@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AuthHeaderService } from '../../shared/auth-header.service';
+import { AuthHeaderService } from '../shared/auth-header.service';
 import { Observable, Subject, combineLatest, BehaviorSubject } from 'rxjs';
-import { Bug } from '../../models/bug';
+import { Bug } from '../models/bug';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { switchMap, map } from 'rxjs/operators';
 
