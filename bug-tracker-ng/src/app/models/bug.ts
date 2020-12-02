@@ -6,10 +6,10 @@ export interface Bug {
   author: string,
   status: string,
   description?: string
-  tags?: [
+  tags?: [{
     name: string,
     colour: string
-  ],
+  }],
   date?: Date,
   comments?: CommentRequest[],
   archived?: boolean

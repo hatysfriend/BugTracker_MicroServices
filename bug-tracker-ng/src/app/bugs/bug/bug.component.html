@@ -4,7 +4,7 @@
       <div id="main">
         <div cdkDropListGroup class="columns" id="containerGroup">
           <div class="column">
-            <h3 class="notification is-danger">Created</h3>
+            <h3 class="notification is-danger">{{statusEnum.Created}}</h3>
             <div (cdkDropListDropped)="dropped($event)" cdkDropList id="Created" [cdkDropListData]="createdBugs" class="container">
               <div *ngIf="loading">
                 Loading...
@@ -15,16 +15,11 @@
                 </div>
               </div>
             </div>
-            <button class="button is-small is-fullwidth is-primary">
-              <span class="icon is-small">
-                <fa-icon [icon]="faPlus"></fa-icon>
-              </span>
-              <span><strong>Add New Card</strong></span>
-            </button>
+            <app-bug-entry [status]="statusEnum.Created"></app-bug-entry>
           </div>
 
           <div class="column">
-            <h3 class="notification is-warning">In-Progress</h3>
+            <h3 class="notification is-warning">{{statusEnum.InProgress}}</h3>
             <div (cdkDropListDropped)="dropped($event)" cdkDropList id="In-Progress" [cdkDropListData]="inProgressBugs" class="container">
               <div *ngIf="loading">
                 Loading...
@@ -33,16 +28,11 @@
                 <app-bug-card [bug]="bug"></app-bug-card>
               </div>
             </div>
-            <button class="button is-small is-fullwidth is-primary">
-              <span class="icon is-small">
-                <fa-icon [icon]="faPlus"></fa-icon>
-              </span>
-              <span><strong>Add New Card</strong></span>
-            </button>
+            <app-bug-entry [status]="statusEnum.InProgress"></app-bug-entry>
           </div>
 
           <div class="column">
-            <h3 class="notification is-success">Fixed</h3>
+            <h3 class="notification is-success">{{statusEnum.Fixed}}</h3>
             <div (cdkDropListDropped)="dropped($event)" cdkDropList id="Fixed" [cdkDropListData]="fixedBugs" class="container">
               <div *ngIf="loading">
                   Loading...
@@ -51,17 +41,10 @@
                 <app-bug-card [bug]="bug" ></app-bug-card>
               </div>
             </div>
-            <button class="button is-small is-fullwidth is-primary">
-              <span class="icon is-small">
-                <fa-icon [icon]="faPlus"></fa-icon>
-              </span>
-              <span><strong>Add New Card</strong></span>
-            </button>
+            <app-bug-entry [status]="statusEnum.Fixed"></app-bug-entry>
           </div>
         </div>
       </div>
-      <p>User ID: {{ user.id }}</p>
-      <p>Username: {{ user.username }}</p>
     </div> 
   </div>
 

@@ -14,18 +14,20 @@
 
     <div class="columns is-mobile">
       <div class="column is-1">
-          <span class="icon has-text-primary mr-3">
-            <fa-icon [icon]="faCaretUp" class="fa-2x"></fa-icon>
-          </span>
-        <div>
-          {{999}}
-        </div>
+        <app-comment-upvote [comment]="comment" [bugId]="bugId"></app-comment-upvote>
       </div>
       <div class="column">
-        <div class="comment-body">
+        <textarea (blur)="editComment()" *ngIf="isEditable" [(ngModel)]="comment.comment" class="textarea"></textarea>
+        <div *ngIf="!isEditable" class="comment-body">
           {{comment.comment}}
         </div>
       </div>
+    </div>
+    <div class="columns is-mobile">
+      <div class="column is-1"></div>
+      <a (click)="handleEdit()" class="has-text-primary ml-2">edit</a>
+      <div class="mx-1"> - </div>
+      <a (click)="handleDelete()" class="has-text-primary">delete</a>
     </div>
   </div>
 </article>

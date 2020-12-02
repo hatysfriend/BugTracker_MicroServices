@@ -1,8 +1,8 @@
 export interface CommentRequest {
   comment: string,
   user?: string,
-  likes?: [
+  likes?: [{
     user: string
-  ],
+  }],
   date?: Date
 };

@@ -1,33 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Bug } from 'src/app/models/bug';
-import { BugService } from '../index-bug';
+import { BugService } from 'src/app/bugs/index-bug';
 
-import { BugDescComponent } from './bug-desc.component';
+import { ColorPickerComponent } from './color-picker.component';
 
-describe('BugDescComponent', () => {
-  let component: BugDescComponent;
-  let fixture: ComponentFixture<BugDescComponent>;
+describe('ColorPickerComponent', () => {
+  let component: ColorPickerComponent;
+  let fixture: ComponentFixture<ColorPickerComponent>;
   let mockBugService: jasmine.SpyObj<BugService>;
 
   beforeEach(async () => {
     mockBugService = jasmine.createSpyObj(['getBugById', 'updateBug','addBug', 'updateBugData']);
 
     await TestBed.configureTestingModule({
-      declarations: [ BugDescComponent ],
+      declarations: [ ColorPickerComponent ],
       providers: [{ provide: BugService, useValue: mockBugService }]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    const bug: Bug = {
-      name: 'test',
-      author: 'test',
-      status: 'test'
-    };
-    fixture = TestBed.createComponent(BugDescComponent);
+    fixture = TestBed.createComponent(ColorPickerComponent);
     component = fixture.componentInstance;
-    component.bug = bug;
     fixture.detectChanges();
   });
 

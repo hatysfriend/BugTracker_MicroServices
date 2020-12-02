@@ -1,0 +1,20 @@
+<button (click)="showInput()" class="button is-small is-fullwidth is-primary">
+  <span class="icon is-small">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </span>
+  <span><strong>Add New Card</strong></span>
+</button>
+<div *ngIf="isInput">
+  <div *ngIf="showWarning">
+    <div class="notification is-warning">
+      <button (click)="closeFlash()" class="delete"></button>
+      <strong>Whoa, </strong>
+      you need a title for your bug!
+    </div>
+  </div>
+  <textarea (keydown)="closeFlash()" class="textarea" placeholder="Enter a title..." [(ngModel)]="title"></textarea>
+  <div class="entry-controls">
+    <button (click)="saveNewBug()" class="button is-success is-small mr-4">Create</button>
+    <button (click)="cancelEntry()" class="button is-light is-small">Cancel</button>
+  </div>
+</div>

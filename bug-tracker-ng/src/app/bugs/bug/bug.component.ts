@@ -5,7 +5,8 @@ import { UserService } from '../../shared/user.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Observable } from 'rxjs';
 import { BugModalStateService } from '../../bug-modal-state.service';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { BugStatus } from '../../models/bug-status';
+
 
 @Component({
   selector: 'app-bug',
@@ -19,7 +20,7 @@ export class BugComponent implements OnInit {
   loading: boolean = false;
   modalOpen$: Observable<boolean>
 
-  faPlus = faPlus;
+  statusEnum: typeof BugStatus = BugStatus;
 
   constructor(private bugService: BugService, private userService: UserService, private bugModalService: BugModalStateService) { }
 
@@ -29,17 +30,17 @@ export class BugComponent implements OnInit {
     this.modalOpen$ = this.bugModalService.getModalState();
 
     this.bugService.bugs$.subscribe((data) => {
+      this.createdBugs = [];
+      this.inProgressBugs = [];
+      this.fixedBugs = [];
       data.forEach(bug => {
         if(bug.status === 'Created'){
-          this.createdBugs = [];
           this.createdBugs.push(bug);
         }
         if(bug.status === 'In-Progress'){
-          this.inProgressBugs = [];
           this.inProgressBugs.push(bug);
         }
         if(bug.status === 'Fixed'){
-          this.fixedBugs = [];
           this.fixedBugs.push(bug);
         }
       });
@@ -57,6 +58,7 @@ export class BugComponent implements OnInit {
     const updatedBug = {
       status: newStatus
     }
+
     this.bugService.updateBug(bugId, updatedBug).subscribe();
   }
 

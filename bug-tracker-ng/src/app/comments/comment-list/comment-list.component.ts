@@ -11,13 +11,12 @@ import { CommentResponse } from '../../models/commentResponseModel';
 })
 export class CommentListComponent implements OnInit {
   @Input() bug: Bug
-  comments$: Observable<CommentResponse[]>;
+  
+  comments$ = this.commentService.allComments$
 
   constructor(private commentService: CommentService) { }
 
   ngOnInit(): void {
-    console.log("INIT");
     this.commentService.updateCommentData(this.bug._id);
-    this.comments$ = this.commentService.allComments$
   }
 }

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AuthHeaderService } from '../shared/auth-header.service';
-import { Observable, Subject, combineLatest, BehaviorSubject } from 'rxjs';
+import { Observable, Subject, combineLatest, BehaviorSubject, of } from 'rxjs';
 import { Bug } from '../models/bug';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, mergeMap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -47,6 +47,21 @@ export class BugService {
           return this.http.patch(`${this.BaseUrl}/update/${bugId}`, bug, {
             headers: new HttpHeaders(header)
           });
+        })
+      );
+  }
+
+  addBug(bug: any): Observable<any> {
+    return this.authHeaderService.getAuthHeader()
+      .pipe(
+        switchMap((header) => {
+          return this.http.post(`${this.BaseUrl}/add`, { bug: bug }, {
+            headers: new HttpHeaders(header)
+          });
+        }),
+        mergeMap(() => {
+          this.updateAction$.next(null);
+          return of();
         })
       );
   }

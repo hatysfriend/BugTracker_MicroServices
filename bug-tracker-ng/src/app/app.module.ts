@@ -33,11 +33,14 @@ import { CommentService } from './comments/comment.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TagsComponent } from './tags/tags.component';
-import { TagEntryComponent } from './tag-entry/tag-entry.component';
+import { TagsComponent } from './tag/tags/tags.component';
+import { TagEntryComponent } from './tag/tag-entry/tag-entry.component';
 import { CommentComponent } from './comments/comment/comment.component';
 import { CommentEntryComponent } from './comments/comment-entry/comment-entry.component';
 import { CommentListComponent } from '../app/comments/comment-list/comment-list.component';
+import { CommentUpvoteComponent } from './comments/comment-upvote/comment-upvote.component';
+import { BugEntryComponent } from './bugs/bug-entry/bug-entry.component';
+import { ColorPickerComponent } from './tag/color-picker/color-picker.component';
 
 
 
@@ -58,7 +61,10 @@ import { CommentListComponent } from '../app/comments/comment-list/comment-list.
     BugTitleComponent,
     CommentComponent,
     CommentEntryComponent,
-    CommentListComponent
+    CommentListComponent,
+    CommentUpvoteComponent,
+    BugEntryComponent,
+    ColorPickerComponent
   ],
   imports: [
     DragDropModule,

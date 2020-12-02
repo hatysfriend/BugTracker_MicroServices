@@ -47,8 +47,8 @@ export class CommentEntryComponent implements OnInit {
     };
 
     this.commentService.addComment(this.bugId, comment).subscribe();
-    this.commentService.updateCommentData(this.bugId);
     this.bugService.updateBugData();
+    this.comment = '';
   }
 
   saveDisabled() {

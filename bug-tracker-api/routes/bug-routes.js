@@ -18,7 +18,6 @@ router.get('/seed', testController.seed_data);
 // Comments
 router.post('/:bugId/comments/add', authenticator.authenticateToken, commentController.insert_comment);
 router.get('/:bugId/comments/getall', authenticator.authenticateToken, commentController.get_comments);
-// router.get('/:bugId/comments/getbyid/:commentId');
 router.patch('/:bugId/comments/update/:commentId', authenticator.authenticateToken, commentController.update_comment);
 router.delete('/:bugId/comments/delete/:commentId', authenticator.authenticateToken, commentController.delete_comment);
 

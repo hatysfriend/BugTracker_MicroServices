@@ -3,7 +3,7 @@ import { BugModalStateService } from '../../bug-modal-state.service';
 import { Observable } from 'rxjs';
 import { Bug } from '../../models/bug';
 import { BugService } from '../bug.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { faBug, faComment, faList } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from './../../shared/user.service';
 
@@ -23,7 +23,6 @@ export class BugModalComponent implements OnInit {
   constructor(
     private modalService: BugModalStateService, 
     private bugService: BugService, 
-    private activeRoute: ActivatedRoute, 
     private router: Router,
     private user: UserService) { }
 

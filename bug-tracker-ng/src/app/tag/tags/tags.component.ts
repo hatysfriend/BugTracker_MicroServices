@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Tag } from '../models/tag';
+import { Bug } from 'src/app/models/bug';
+import { Tag } from '../../models/tag';
 
 @Component({
   selector: 'app-tags',
@@ -8,6 +9,7 @@ import { Tag } from '../models/tag';
 })
 export class TagsComponent implements OnInit {
   @Input() tags: Tag[];
+  @Input() bug: Bug;
 
   constructor() { }
 

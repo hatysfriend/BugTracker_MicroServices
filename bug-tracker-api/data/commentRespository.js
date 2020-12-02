@@ -33,6 +33,7 @@ module.exports = (() => {
   }
 
   async function _updateComment(bugId, commentId, comment) {
+    console.log(`Comment Update${JSON.stringify(comment)}`);
     const set = {};
     for (const prop in comment) {
       if (Object.prototype.hasOwnProperty.call(comment, prop)) {

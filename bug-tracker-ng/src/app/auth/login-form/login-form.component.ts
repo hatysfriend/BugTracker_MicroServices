@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthMessagingService } from './../auth-messaging.service';
@@ -20,7 +20,6 @@ export class LoginFormComponent implements OnInit {
   });
 
   constructor(
-    private form: ReactiveFormsModule, 
     private routerActive: ActivatedRoute, 
     private authMessagingService: AuthMessagingService, 
     private authService: AuthService,
