@@ -9,6 +9,18 @@ const router = express.Router();
 // #region
 /**
  * @swagger
+ * components:
+ *  securitySchemes:
+ *   Bearer:
+ *     type: http
+ *     scheme: bearer
+ *     bearerFormat: JWT
+ */
+// #endregion
+
+// #region
+/**
+ * @swagger
  * definitions:
  *   Bug:
  *     properties:
