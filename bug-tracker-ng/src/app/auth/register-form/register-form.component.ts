@@ -35,7 +35,7 @@ export class RegisterFormComponent implements OnInit {
 
     this.authService.registerUser(userObj).subscribe(() => {
         this.routerBasic.navigate(['auth/login']);
-        return this.resetForm();
+        this.resetForm();
       }
     );
   }
