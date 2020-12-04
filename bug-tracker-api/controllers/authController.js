@@ -17,16 +17,14 @@ const generateRefreshToken = (user) => {
 module.exports = {
   register_a_user_post: async (req, res) => {
     const user = await authHelper.createEncryptedUser(req.body.username, req.body.password);
-    console.log(`trash${req.body.username}`);
     repo.InsertUser(user)
       .then(() => {
-        console.log('Authenticatus');
         authenticator.authenticate(req.body.username, req.body.password)
           .then((userReturn) => {
             console.log('Success');
             res.status(201);
             res.json({
-              message: 'Registration Succesful',
+              message: 'Registration Successful',
               user: userReturn
             });
           })
