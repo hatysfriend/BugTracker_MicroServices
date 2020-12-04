@@ -28,6 +28,7 @@ export class BugTitleComponent implements OnInit, OnDestroy{
     this.isEdit = false;
     if (this.bug.name.trim().length === 0) {
       this.bug.name = this.originalTitle;
+      return;
     }
     const update = {
       name: this.bug.name

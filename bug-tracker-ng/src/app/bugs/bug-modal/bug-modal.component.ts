@@ -6,6 +6,7 @@ import { BugService } from '../bug.service';
 import { Router } from '@angular/router';
 import { faBug, faComment, faList } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from './../../shared/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-bug-modal',
@@ -15,6 +16,7 @@ import { UserService } from './../../shared/user.service';
 export class BugModalComponent implements OnInit {
   isModal$: Observable<boolean>;
   bug$: Observable<Bug>
+  user$: Observable<User>;
 
   faBug = faBug;
   faList = faList;
@@ -29,9 +31,10 @@ export class BugModalComponent implements OnInit {
   ngOnInit(): void {
     const id = history.state.bugId;
     this.bug$ = this.bugService.getBugById(id);
+    this.user$ = this.user.getUser();
   }
 
-  user$ = this.user.getUser();
+  
 
   closeModal() {
     this.router.navigate(['bugs']);

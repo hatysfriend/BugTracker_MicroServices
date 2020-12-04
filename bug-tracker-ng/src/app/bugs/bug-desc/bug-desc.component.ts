@@ -25,6 +25,7 @@ export class BugDescComponent implements OnDestroy {
     this.isEdit = false;
     if(this.bug.description.trim().length == 0) {
       this.bug.description = 'Enter description here...';
+      return;
     }
     const update = {
       description: this.bug.description

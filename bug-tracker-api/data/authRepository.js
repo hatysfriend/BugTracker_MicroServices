@@ -15,7 +15,6 @@ module.exports = (() => {
   }
 
   async function _insertUser(user) {
-    console.log('Trouble');
     const userModel = new UserModel(user);
     return userModel.save();
   }

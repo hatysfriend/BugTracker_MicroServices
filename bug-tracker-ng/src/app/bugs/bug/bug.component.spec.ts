@@ -3,8 +3,8 @@ import { of } from 'rxjs';
 import { BugModalStateService } from 'src/app/bug-modal-state.service';
 import { UserService } from 'src/app/shared/user.service';
 import { BugService } from '../index-bug';
-
 import { BugComponent } from './bug.component';
+import { Bug } from './../../models/bug';
 
 describe('BugComponent', () => {
   let component: BugComponent;
@@ -14,7 +14,25 @@ describe('BugComponent', () => {
   let mockUserService: jasmine.SpyObj<UserService>;
 
   beforeEach(async () => {
-    mockBugService = jasmine.createSpyObj<BugService>(['getBugById', 'updateBug','addBug', 'updateBugData']);
+    const bugs: Bug[] = [
+      {
+        name: 'Created',
+        status: 'Created',
+        author: 'Created'
+      },
+      {
+        name: 'Fixed',
+        status: 'Fixed',
+        author: 'Fixed'
+      },
+      {
+        name: 'In-Progress',
+        status: 'In-Progress',
+        author: 'In-Progress'
+      },
+    ]
+
+    mockBugService = jasmine.createSpyObj<BugService>(['getBugById', 'updateBug','addBug', 'updateBugData'], { 'bugs$': of(bugs) });
     mockModalService = jasmine.createSpyObj<BugModalStateService>(['getModalState', 'openModal', 'closeModal']);
     mockUserService = jasmine.createSpyObj<UserService>(['getUser']);
 
@@ -38,5 +56,22 @@ describe('BugComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should get modal state', () => {
+    mockModalService.getModalState.and.returnValue(of(true));
+    component.ngOnInit();
+    expect(component.modalOpen$.subscribe((value) => {
+      expect(value).toBeTrue();
+    }));
+  });
+
+  it('should populate bug arrays', () => {
+    expect(component.createdBugs.length).toBe(1);
+    expect(component.createdBugs[0].status).toEqual('Created');
+    expect(component.fixedBugs.length).toBe(1);
+    expect(component.fixedBugs[0].status).toEqual('Fixed');
+    expect(component.inProgressBugs.length).toBe(1);
+    expect(component.inProgressBugs[0].status).toEqual('In-Progress');
   });
 });

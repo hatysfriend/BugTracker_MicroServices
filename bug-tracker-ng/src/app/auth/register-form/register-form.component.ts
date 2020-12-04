@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthMessagingService } from './../auth-messaging.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { User } from '../../models/user';
 
@@ -20,7 +20,7 @@ export class RegisterFormComponent implements OnInit {
     password: new FormControl()
   });
 
-  constructor(private authMessagingService: AuthMessagingService, private router: ActivatedRoute, private authService: AuthService) { }
+  constructor(private authMessagingService: AuthMessagingService, private router: ActivatedRoute, private authService: AuthService, private routerBasic: Router) { }
 
   ngOnInit(): void {
     this.setMessage('');
@@ -33,7 +33,11 @@ export class RegisterFormComponent implements OnInit {
       password: this.user.value.password
     };
 
-    this.authService.registerUser(userObj).subscribe();
+    this.authService.registerUser(userObj).subscribe(() => {
+        this.routerBasic.navigate(['auth/login']);
+        return this.resetForm();
+      }
+    );
   }
 
   resetForm() {
