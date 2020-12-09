@@ -35,6 +35,7 @@ export class CommentEntryComponent implements OnInit {
 
   hideControls() {
     this.controlsVisible = false;
+    this.comment = '';
   }
 
   saveComment() {

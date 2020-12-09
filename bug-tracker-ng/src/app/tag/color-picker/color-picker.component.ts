@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Bug } from 'src/app/models/bug';
-import { BugService } from './../../bugs/bug.service';
+import { Tag } from 'src/app/models/tag';
+import { TagServiceService } from './../tag-service.service';
 
 @Component({
   selector: 'app-color-picker',
@@ -10,7 +10,7 @@ import { BugService } from './../../bugs/bug.service';
 
 export class ColorPickerComponent {
   @Input() color: string;
-  @Input() bug: Bug;
+  @Input() bugId: string;
   tagName: string;
 
   public defaultColors: string[] = [
@@ -38,7 +38,7 @@ export class ColorPickerComponent {
     '#c1800b'
   ];
 
-  constructor(private bugService: BugService) {}
+  constructor(private tagService: TagServiceService) {}
 
   public changeColor(color: string): void {
     this.color = color;
@@ -53,19 +53,11 @@ export class ColorPickerComponent {
   }
   
   createTag() {
-    const tag = {
-      name: this.tagName, 
+    const tag: Tag = {
+      name: this.tagName,
       colour: this.color
     }
 
-    this.bug.tags.push(tag);
-
-    const updateBug = {
-      tags: this.bug.tags
-    };
-
-    this.bugService.updateBug(this.bug._id, updateBug).subscribe(() => {
-      this.bugService.updateBugData();
-    });
+    this.tagService.addTag(this.bugId, tag).subscribe();
   }
 }

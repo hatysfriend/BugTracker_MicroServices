@@ -1,19 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BugService } from 'src/app/bugs/index-bug';
+import { AuthHeaderService } from 'src/app/shared/auth-header.service';
+import { TagServiceService } from '../tag-service.service';
 
 import { ColorPickerComponent } from './color-picker.component';
 
 describe('ColorPickerComponent', () => {
   let component: ColorPickerComponent;
   let fixture: ComponentFixture<ColorPickerComponent>;
-  let mockBugService: jasmine.SpyObj<BugService>;
+  let mockTagService: jasmine.SpyObj<TagServiceService>;
 
   beforeEach(async () => {
-    mockBugService = jasmine.createSpyObj(['getBugById', 'updateBug','addBug', 'updateBugData']);
-
+    mockTagService = jasmine.createSpyObj<TagServiceService>(["addTag", "deleteTag", "updateTagData"]);
     await TestBed.configureTestingModule({
       declarations: [ ColorPickerComponent ],
-      providers: [{ provide: BugService, useValue: mockBugService }]
+      providers: [
+        { provide: TagServiceService, useValue: mockTagService }
+      ]
     })
     .compileComponents();
   });

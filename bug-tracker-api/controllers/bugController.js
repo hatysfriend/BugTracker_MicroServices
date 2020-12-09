@@ -23,16 +23,16 @@ module.exports = {
       });
   },
 
-  add_tag: (req, res) => {
-    repository
-      .AddTag(req.body.id, req.body.tag)
-      .then((tag) => {
-        res.status(201).send(tag);
-      })
-      .catch((err) => {
-        res.status(500).send({ error: err });
-      });
-  },
+  // add_tag: (req, res) => {
+  //   repository
+  //     .AddTag(req.body.id, req.body.tag)
+  //     .then((tag) => {
+  //       res.status(201).send(tag);
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).send({ error: err });
+  //     });
+  // },
 
   create_bug_post: (req, res) => {
     const { bug } = req.body;

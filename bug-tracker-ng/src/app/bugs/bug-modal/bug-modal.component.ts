@@ -34,11 +34,20 @@ export class BugModalComponent implements OnInit {
     this.user$ = this.user.getUser();
   }
 
-  
-
   closeModal() {
     this.router.navigate(['bugs']);
     this.modalService.closeModal();
+  }
+
+  handleArchiveClick() {
+    const archiveUpdate = {
+      archived: true
+    };
+
+    this.bugService.updateBug(history.state.bugId, archiveUpdate).subscribe(() => {
+      this.closeModal();
+      this.bugService.updateBugData();
+    });
   }
 
   setBugColour(bug: Bug) {

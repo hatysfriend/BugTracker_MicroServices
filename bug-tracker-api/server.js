@@ -39,6 +39,9 @@ const swaggerOptions = {
 
 const specs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
+app.get('/api-json', (req, res) => {
+  res.send(specs);
+});
 
 app.listen(3002, () => {
   // eslint-disable-next-line no-console

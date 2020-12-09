@@ -1,4 +1,5 @@
 import { CommentRequest } from './commentRequestModel';
+import { Tag } from './tag';
 
 export interface Bug {
   _id?: string, 
@@ -6,10 +7,7 @@ export interface Bug {
   author: string,
   status: string,
   description?: string
-  tags?: [{
-    name: string,
-    colour: string
-  }],
+  tags?: Tag[],
   date?: Date,
   comments?: CommentRequest[],
   archived?: boolean

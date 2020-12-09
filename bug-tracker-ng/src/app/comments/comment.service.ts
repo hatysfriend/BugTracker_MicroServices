@@ -1,13 +1,12 @@
 import { Injectable, OnInit } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { mergeMap, switchMap, tap } from 'rxjs/operators';
+import { mergeMap, switchMap } from 'rxjs/operators';
 import { Observable, BehaviorSubject, combineLatest, Subject, of } from 'rxjs';
 import { AuthHeaderService } from './../shared/auth-header.service';
 import { CommentRequest } from '../models/commentRequestModel';
 import { CommentResponse } from './../models/commentResponseModel';
 
 @Injectable()
-
 export class CommentService {
   private BaseUrl = 'http://localhost:3002/bugs';
 
@@ -18,10 +17,10 @@ export class CommentService {
   allComments$: Observable<CommentResponse[]> = combineLatest([
     this.updateAction$.asObservable()
   ]).pipe(
-    switchMap((luben) => {
+    switchMap((bugId) => {
       return this.authHeaderService.getAuthHeader().pipe(
         switchMap((header) => {
-          return this.http.get<CommentResponse[]>(`${this.BaseUrl}/${luben}/comments/getAll`, {
+          return this.http.get<CommentResponse[]>(`${this.BaseUrl}/${bugId}/comments/getAll`, {
             headers: new HttpHeaders(header)
           })
         })

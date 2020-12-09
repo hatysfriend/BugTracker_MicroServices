@@ -36,6 +36,9 @@ export class RegisterFormComponent implements OnInit {
     this.authService.registerUser(userObj).subscribe(() => {
         this.routerBasic.navigate(['auth/login']);
         this.resetForm();
+      },
+      (err) => {
+        this.setMessage('Sorry, this username is already taken!');
       }
     );
   }

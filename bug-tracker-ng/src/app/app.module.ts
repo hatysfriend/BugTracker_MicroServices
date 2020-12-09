@@ -41,6 +41,7 @@ import { CommentListComponent } from '../app/comments/comment-list/comment-list.
 import { CommentUpvoteComponent } from './comments/comment-upvote/comment-upvote.component';
 import { BugEntryComponent } from './bugs/bug-entry/bug-entry.component';
 import { ColorPickerComponent } from './tag/color-picker/color-picker.component';
+import { TagListComponent } from './tag/tag-list/tag-list.component';
 
 
 
@@ -64,7 +65,8 @@ import { ColorPickerComponent } from './tag/color-picker/color-picker.component'
     CommentListComponent,
     CommentUpvoteComponent,
     BugEntryComponent,
-    ColorPickerComponent
+    ColorPickerComponent,
+    TagListComponent
   ],
   imports: [
     DragDropModule,

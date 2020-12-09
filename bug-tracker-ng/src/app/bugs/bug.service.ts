@@ -5,7 +5,6 @@ import { Bug } from '../models/bug';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { switchMap, map, mergeMap } from 'rxjs/operators';
 
-
 @Injectable()
 export class BugService {
   private BaseUrl = 'http://localhost:3002/bugs';
@@ -61,7 +60,7 @@ export class BugService {
         }),
         mergeMap(() => {
           this.updateAction$.next(null);
-          return of();
+          return of(true);
         })
       );
   }
