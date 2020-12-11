@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from './../../shared/user.service';
-import { BugService } from './../bug.service';
+import { BugService } from '../../shared/bug.service';
 import { Bug } from './../../models/bug';
 import { BugStatus } from '../../models/bug-status';
 

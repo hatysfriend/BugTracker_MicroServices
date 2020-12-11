@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { faList } from '@fortawesome/free-solid-svg-icons';
 import { Bug } from 'src/app/models/bug';
-import { BugService } from '../bug.service';
+import { BugService } from '../../shared/bug.service';
 import { Subscription } from 'rxjs';
 
 @Component({

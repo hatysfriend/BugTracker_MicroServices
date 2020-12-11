@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BugService } from '../bug.service';
+import { BugService } from '../../shared/bug.service';
 
 import { BugTitleComponent } from './bug-title.component';
 import { Bug } from './../../models/bug';

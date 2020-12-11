@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthMessagingService } from './../auth-messaging.service';
-import { AuthService } from './../auth.service';
+import { AuthService } from '../../shared/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -38,16 +38,22 @@ export class LoginFormComponent implements OnInit {
 
     this.authService.loginUser(userObj).subscribe(
       (res) => {
-        this.router.navigate(['bugs']);
+        this.router.navigate(['workspace']);
       },
       (err) => {
-        return this.setMessage("Wrong Username Or Password");
+        this.resetForm();
+        if (err.status == 401) {
+          return this.setMessage("Wrong Username Or Password");
+        }
+        else {
+          return this.setMessage("");
+        }
       } 
     );
   }
 
   resetForm() {
-    this.user = undefined;
+    this.user.reset();
   };
 
   resetMessage() {

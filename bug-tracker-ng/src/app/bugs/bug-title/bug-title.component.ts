@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Bug } from 'src/app/models/bug';
-import { BugService } from '../bug.service';
+import { BugService } from '../../shared/bug.service';
 import { Subscription } from 'rxjs';
 
 @Component({

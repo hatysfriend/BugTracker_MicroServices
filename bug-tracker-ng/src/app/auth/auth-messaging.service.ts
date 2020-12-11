@@ -7,7 +7,6 @@ export class AuthMessagingService {
   private message = new BehaviorSubject<string>('');
   message$ = this.message.asObservable();
 
-
   getAnimationState(): boolean {
     return this.isAnimation;
   }

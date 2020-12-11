@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BugModalStateService } from '../../bug-modal-state.service';
 import { Observable } from 'rxjs';
 import { Bug } from '../../models/bug';
-import { BugService } from '../bug.service';
+import { BugService } from '../../shared/bug.service';
 import { Router } from '@angular/router';
 import { faBug, faComment, faList } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from './../../shared/user.service';

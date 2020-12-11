@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthMessagingService } from './../auth-messaging.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-auth-flash-msg',

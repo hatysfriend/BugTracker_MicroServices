@@ -3,7 +3,7 @@ import { faFile, faPaperclip, faComment } from '@fortawesome/free-solid-svg-icon
 import { CommentService } from './../comment.service';
 import { UserService } from './../../shared/user.service';
 import { CommentRequest } from './../../models/commentRequestModel';
-import { BugService } from './../../bugs/bug.service';
+import { BugService } from '../../shared/bug.service';
 
 @Component({
   selector: 'app-comment-entry',

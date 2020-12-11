@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { AuthMessagingService } from '../auth-messaging.service';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../shared/auth.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RegisterFormComponent } from './register-form.component';
 import { Router } from '@angular/router';

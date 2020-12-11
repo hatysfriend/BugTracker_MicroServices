@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Bug } from '../../models/bug';
-import { BugService } from '../bug.service';
+import { BugService } from '../../shared/bug.service';
 import { UserService } from '../../shared/user.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Observable } from 'rxjs';

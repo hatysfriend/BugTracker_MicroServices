@@ -1,22 +1,20 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from './../auth/auth.service';
+import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { UserService } from './../user.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
-  @Input() username: string;
-
+export class NavbarComponent {
   faSignOutAlt = faSignOutAlt;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
 
-  ngOnInit(): void {
-  }
+  user$ = this.userService.getUser();
 
   logoutHandler() {
     this.authService.logoutUser().subscribe(() => {

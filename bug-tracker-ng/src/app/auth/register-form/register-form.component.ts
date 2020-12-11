@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthMessagingService } from './../auth-messaging.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from './../auth.service';
+import { AuthService } from '../../shared/auth.service';
 import { User } from '../../models/user';
 
 @Component({

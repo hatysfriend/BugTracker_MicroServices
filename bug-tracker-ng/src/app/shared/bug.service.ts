@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthHeaderService } from '../shared/auth-header.service';
+import { AuthHeaderService } from './auth-header.service';
 import { Observable, Subject, combineLatest, BehaviorSubject, of } from 'rxjs';
 import { Bug } from '../models/bug';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -10,7 +10,6 @@ export class BugService {
   private BaseUrl = 'http://localhost:3002/bugs';
 
   private updateAction$: BehaviorSubject<any> = new BehaviorSubject(null);
-
   constructor(private authHeaderService: AuthHeaderService, private http: HttpClient) { }
 
   bugs$ = combineLatest([

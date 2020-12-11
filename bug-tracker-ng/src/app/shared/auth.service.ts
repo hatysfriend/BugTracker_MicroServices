@@ -4,14 +4,15 @@ import { User } from '../models/user';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { TokenResponse } from '../models/tokenResponse';
-import { TokenService } from './../shared/token.service';
+import { TokenService } from './token.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable()
 
 export class AuthService {
   private BaseUrl = 'http://localhost:3002/auth';
 
-  constructor(private http: HttpClient, private tokenService: TokenService) { }
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService) { }
 
   loginUser(user: User): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(`${this.BaseUrl}/login`, { 
@@ -20,22 +21,22 @@ export class AuthService {
     })
       .pipe(
         map((res) => {
-          this.tokenService.setAccessToken(res.accessToken);
-          this.tokenService.setRefreshToken(res.refreshToken);
+          this.localStorageService.setAccessToken(res.accessToken);
+          this.localStorageService.setRefreshToken(res.refreshToken);
           return res;
         }),
         catchError((err) => {
-          console.log(err);
+          console.log(err+"Login fail");
           return throwError(err);
         })
       );
   }
 
   logoutUser(): Observable<any> {
-    return this.http.post<any>(`${this.BaseUrl}/logout`, this.tokenService.getRefreshToken())
+    return this.http.post<any>(`${this.BaseUrl}/logout`, this.localStorageService.getRefreshToken())
       .pipe(
         map((data) => {
-          this.tokenService.deleteTokens();
+          this.localStorageService.deleteTokens();
           return data
         })
       )

@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BugService } from 'src/app/bugs/index-bug';
 import { UserService } from 'src/app/shared/user.service';
 import { AuthMessagingService } from '../auth-messaging.service';
-import { AuthService } from './../auth.service';
+import { AuthService } from '../../shared/auth.service';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;

@@ -4,7 +4,7 @@ import { switchMap, mergeMap } from 'rxjs/operators';
 import { Tag } from '../models/tag';
 import { AuthHeaderService } from './../shared/auth-header.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BugService } from './../bugs/bug.service';
+import { BugService } from '../shared/bug.service';
 
 @Injectable({
   providedIn: 'root'
