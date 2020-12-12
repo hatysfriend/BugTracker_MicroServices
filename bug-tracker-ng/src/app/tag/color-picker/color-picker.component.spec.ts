@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BugService } from 'src/app/bugs/index-bug';
-import { AuthHeaderService } from 'src/app/shared/auth-header.service';
 import { TagServiceService } from '../tag-service.service';
 
 import { ColorPickerComponent } from './color-picker.component';

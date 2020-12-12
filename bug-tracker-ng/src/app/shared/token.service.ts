@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, of, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
@@ -13,7 +13,6 @@ export class TokenService {
   getAccessToken(): Observable<string> {
     const token = this.localStorageService.getAccessToken();
     if(!token) {
-      console.log('Navigating?');
       this.router.navigate(['auth/login']);
       return throwError(new Error("No Access Token Available"));
     }
@@ -48,7 +47,7 @@ export class TokenService {
 
     return this.http.post<any>('http://localhost:3002/auth/token', { 
       token: refreshToken 
-    }).pipe(
+    }, {headers: new HttpHeaders({skip: 'true'})}).pipe(
       map((data) => {
         this.localStorageService.setAccessToken(data.accessToken);
         return data.accessToken

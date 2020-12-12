@@ -3,7 +3,6 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AuthMessagingService } from './../auth/auth-messaging.service';
 import { UserMessagingService } from './../shared/user-messaging.service';
 
 @Injectable()
@@ -25,5 +24,4 @@ export class ApiConnectionInterceptor implements HttpInterceptor {
       )
     )
   }
-
 }

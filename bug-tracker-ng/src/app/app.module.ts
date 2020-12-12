@@ -17,8 +17,7 @@ import { CoreModule } from './core.module';
     UserMessagingComponent
   ],
   imports: [
-  
-  CoreModule,
+    CoreModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserModule,

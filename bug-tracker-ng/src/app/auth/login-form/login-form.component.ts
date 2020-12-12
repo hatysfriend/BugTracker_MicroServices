@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthMessagingService } from './../auth-messaging.service';
 import { AuthService } from '../../shared/auth.service';
+import { UserMessagingService } from './../../shared/user-messaging.service';
 
 @Component({
   selector: 'app-login-form',
@@ -23,7 +24,8 @@ export class LoginFormComponent implements OnInit {
     private routerActive: ActivatedRoute, 
     private authMessagingService: AuthMessagingService, 
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private userMessagingService: UserMessagingService) { }
 
   ngOnInit(): void {
     this.setMessage('');
@@ -57,6 +59,7 @@ export class LoginFormComponent implements OnInit {
   };
 
   resetMessage() {
+    this.userMessagingService.clearMessage();
     this.authMessagingService.setMessage('');
   };
 

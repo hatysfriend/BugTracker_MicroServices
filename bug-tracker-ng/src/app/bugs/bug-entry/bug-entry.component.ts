@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from './../../shared/user.service';
 import { BugService } from '../../shared/bug.service';
 import { Bug } from './../../models/bug';
 import { BugStatus } from '../../models/bug-status';
@@ -18,7 +17,7 @@ export class BugEntryComponent implements OnInit {
   title: string;
   showWarning: boolean = false;
 
-  constructor(private userService: UserService, private bugService: BugService) { }
+  constructor(private bugService: BugService) { }
 
   ngOnInit(): void {
   }
