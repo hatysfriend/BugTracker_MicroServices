@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faBug, faEdit, faComment } from '@fortawesome/free-solid-svg-icons';
 import { Bug } from '../../models/bug';
-import { BugModalStateService } from '../../bug-modal-state.service';
+import { BugModalStateService } from '../../shared/bug-modal-state.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,6 +31,7 @@ export class BugCardComponent {
   }
 
   handleEditClick() {
+    this.modalService.setBugEditState(this.bug);
     this.modalService.openModal();
     this.router.navigate([`bugs/edit`], { state: { bugId: this.bug._id }});
   }

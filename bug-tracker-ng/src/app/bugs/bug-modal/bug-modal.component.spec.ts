@@ -1,7 +1,7 @@
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { BugModalComponent } from './bug-modal.component';
 import { BugService } from '../../shared/bug.service';
-import { BugModalStateService } from 'src/app/bug-modal-state.service';
+import { BugModalStateService } from 'src/app/shared/bug-modal-state.service';
 import { UserService } from 'src/app/shared/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';

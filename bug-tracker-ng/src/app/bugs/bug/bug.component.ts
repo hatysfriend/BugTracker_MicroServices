@@ -4,7 +4,7 @@ import { BugService } from '../../shared/bug.service';
 import { UserService } from '../../shared/user.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Observable, Subscription } from 'rxjs';
-import { BugModalStateService } from '../../bug-modal-state.service';
+import { BugModalStateService } from '../../shared/bug-modal-state.service';
 import { BugStatus } from '../../models/bug-status';
 
 @Component({
@@ -31,7 +31,6 @@ export class BugComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push
       (this.bugService.bugs$.subscribe((data) => {
-        console.log("Reloading bugs");
         this.createdBugs = [];
         this.inProgressBugs = [];
         this.fixedBugs = [];

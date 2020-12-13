@@ -24,7 +24,6 @@ export class BugService implements OnInit {
     switchMap(() => {
       return this.workspaceStateService.getState()
         .pipe(
-          tap(() => console.log("How Many Times?")),
           switchMap((state) => {
             return this.http.get<Bug[]>(`${this.BaseUrl}/${state}/getAll`);
           })
@@ -50,7 +49,6 @@ export class BugService implements OnInit {
   }
 
   updateBugData() {
-    console.log("Refreshing bugs");
     this.updateAction$.next(null);
   }
 }

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { BugModalStateService } from 'src/app/bug-modal-state.service';
+import { BugModalStateService } from 'src/app/shared/bug-modal-state.service';
 import { UserService } from 'src/app/shared/user.service';
 import { BugService } from '../index-bug';
 import { BugComponent } from './bug.component';

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BugModalStateService } from 'src/app/bug-modal-state.service';
+import { BugModalStateService } from 'src/app/shared/bug-modal-state.service';
 import { Bug } from 'src/app/models/bug';
 import { BugCardComponent } from './bug-card.component';
 

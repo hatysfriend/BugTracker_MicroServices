@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AuthMessagingService } from './auth/auth-messaging.service';
 import { TokenService } from './shared/token.service';
 import { UserService } from './shared/user.service';
-import { BugModalStateService } from './bug-modal-state.service';
+import { BugModalStateService } from './shared/bug-modal-state.service';
 import { AuthService } from '../app/shared/auth.service';
 import { BugService } from 'src/app/bugs/index-bug';
 import { LocalStorageService } from './shared/local-storage.service';

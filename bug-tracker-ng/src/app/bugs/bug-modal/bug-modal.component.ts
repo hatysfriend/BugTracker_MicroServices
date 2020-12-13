@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BugModalStateService } from '../../bug-modal-state.service';
+import { BugModalStateService } from '../../shared/bug-modal-state.service';
 import { Observable, Subscription } from 'rxjs';
 import { Bug } from '../../models/bug';
 import { BugService } from '../../shared/bug.service';
@@ -17,7 +17,7 @@ export class BugModalComponent implements OnInit, OnDestroy {
   isModal$: Observable<boolean>;
   bug$: Observable<Bug>
   user$: Observable<User>;
-  bugSubscription: Subscription;
+  subscriptions: Subscription[] = [];
 
   faBug = faBug;
   faList = faList;
@@ -30,9 +30,12 @@ export class BugModalComponent implements OnInit, OnDestroy {
     private user: UserService) { }
 
   ngOnInit(): void {
-    const id = history.state.bugId;
-    this.bug$ = this.bugService.getBugById(id);
-    this.user$ = this.user.getUser();
+    this.subscriptions.push(
+      this.modalService.getBugEditState().subscribe((bugId) => {
+        this.bug$ = this.bugService.getBugById(bugId);
+        this.user$ = this.user.getUser();
+      })
+    );
   }
 
   closeModal() {
@@ -45,10 +48,12 @@ export class BugModalComponent implements OnInit, OnDestroy {
       archived: true
     };
 
-    this.bugSubscription = this.bugService.updateBug(history.state.bugId, archiveUpdate).subscribe(() => {
-      this.closeModal();
-      this.bugService.updateBugData();
-    });
+    this.subscriptions.push(
+      this.bugService.updateBug(history.state.bugId, archiveUpdate).subscribe(() => {
+        this.closeModal();
+        this.bugService.updateBugData();
+      })
+    );
   }
 
   setBugColour(bug: Bug) {
@@ -64,8 +69,10 @@ export class BugModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.bugSubscription) {
-      this.bugSubscription.unsubscribe();
-    }
+    this.subscriptions.forEach(sub => {
+      if (sub) {
+        sub.unsubscribe();
+      }
+    });
   }
 }

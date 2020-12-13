@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class WorkspaceStateService {
-  stateSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  private stateSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   constructor(private localStorageService: LocalStorageService, private router: Router) { }
 
