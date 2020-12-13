@@ -1,6 +1,5 @@
-import { Component, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { fromEvent, Subscription } from 'rxjs';
 import { BaseClickDetectorComponent } from './../../shared/CommonComponents/ClickOusideEventBase.component';
 
 @Component({

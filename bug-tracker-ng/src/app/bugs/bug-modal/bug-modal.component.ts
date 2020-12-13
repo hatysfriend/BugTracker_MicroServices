@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BugModalStateService } from '../../bug-modal-state.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Bug } from '../../models/bug';
 import { BugService } from '../../shared/bug.service';
 import { Router } from '@angular/router';
@@ -13,18 +13,19 @@ import { User } from 'src/app/models/user';
   templateUrl: './bug-modal.component.html',
   styleUrls: ['./bug-modal.component.scss']
 })
-export class BugModalComponent implements OnInit {
+export class BugModalComponent implements OnInit, OnDestroy {
   isModal$: Observable<boolean>;
   bug$: Observable<Bug>
   user$: Observable<User>;
+  bugSubscription: Subscription;
 
   faBug = faBug;
   faList = faList;
   faComment = faComment;
 
   constructor(
-    private modalService: BugModalStateService, 
-    private bugService: BugService, 
+    private modalService: BugModalStateService,
+    private bugService: BugService,
     private router: Router,
     private user: UserService) { }
 
@@ -44,21 +45,27 @@ export class BugModalComponent implements OnInit {
       archived: true
     };
 
-    this.bugService.updateBug(history.state.bugId, archiveUpdate).subscribe(() => {
+    this.bugSubscription = this.bugService.updateBug(history.state.bugId, archiveUpdate).subscribe(() => {
       this.closeModal();
       this.bugService.updateBugData();
     });
   }
 
   setBugColour(bug: Bug) {
-    if(bug.status === "Created") {
+    if (bug.status === "Created") {
       return { 'has-text-danger': true }
     }
-    if(bug.status === "In-Progress") {
+    if (bug.status === "In-Progress") {
       return { 'has-text-warning': true }
     }
-    if(bug.status === "Fixed") {
+    if (bug.status === "Fixed") {
       return { 'has-text-success': true }
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.bugSubscription) {
+      this.bugSubscription.unsubscribe();
     }
   }
 }

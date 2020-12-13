@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { LoadingService } from './../loading.service';
 
@@ -9,18 +10,13 @@ import { LoadingService } from './../loading.service';
 })
 export class LoadingComponent implements OnInit {
   loading: boolean = false;
+  loading$: Observable<boolean>;
 
   constructor(private loadingService: LoadingService) { }
 
   ngOnInit(): void {
-    this.monitorLoading();
-  }
-
-  monitorLoading() {
-    this.loadingService.loadingSubject.pipe(
+    this.loading$ = this.loadingService.loadingSubject.pipe(
       delay(0)
-    ).subscribe((loading) => {
-      this.loading = loading;
-    });
+    )
   }
 }

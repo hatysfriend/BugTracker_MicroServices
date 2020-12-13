@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './bug-card.component.html',
   styleUrls: ['./bug-card.component.scss']
 })
-export class BugCardComponent implements OnInit {
+export class BugCardComponent {
   @Input() bug: Bug;
 
   faBug = faBug;
@@ -17,9 +17,6 @@ export class BugCardComponent implements OnInit {
   faComment = faComment;
 
   constructor(private modalService: BugModalStateService, private router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   setBugColour() {
     if(this.bug.status === "Created") {

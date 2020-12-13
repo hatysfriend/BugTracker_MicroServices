@@ -96,7 +96,7 @@ const router = express.Router();
  *           $ref: '#/definitions/Bug'
  */
 // #endregion
-router.get('/getAll', authenticator.authenticateToken, bugController.get_all_bugs);
+router.get('/:workspaceId/getAll', authenticator.authenticateToken, bugController.get_all_bugs);
 
 // #region
 /**

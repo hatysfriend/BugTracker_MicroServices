@@ -7,11 +7,12 @@ import { SharedModule } from './../shared/shared.module';
   declarations: [
     WorkspaceRoutingModule.components
   ],
+  providers: [
+  ],
   imports: [
     CommonModule,
     WorkspaceRoutingModule,
     SharedModule
-  ],
-  exports: [SharedModule]
+  ]
 })
 export class WorkspaceModule { }

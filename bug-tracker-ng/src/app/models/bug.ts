@@ -10,5 +10,6 @@ export interface Bug {
   tags?: Tag[],
   date?: Date,
   comments?: CommentRequest[],
-  archived?: boolean
+  archived?: boolean,
+  workspace: string
 };

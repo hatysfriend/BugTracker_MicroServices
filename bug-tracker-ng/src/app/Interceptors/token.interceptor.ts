@@ -9,6 +9,7 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log("Interceptor");
     // If http request should not be intercepted it will have the skip header (auth routes)
     if (req.headers.get('skip')) {
       req.headers.delete('skip');

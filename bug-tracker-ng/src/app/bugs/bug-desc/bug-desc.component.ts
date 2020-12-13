@@ -11,9 +11,9 @@ import { Subscription } from 'rxjs';
 })
 export class BugDescComponent implements OnDestroy {
   @Input() bug: Bug;
-  updateBug: Subscription;
   isEdit: boolean = false;
   faList = faList;
+  updateBug: Subscription;
 
   constructor(private bugService: BugService) { }
 

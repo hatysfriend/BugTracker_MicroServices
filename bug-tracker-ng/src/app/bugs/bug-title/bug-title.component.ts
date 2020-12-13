@@ -33,7 +33,7 @@ export class BugTitleComponent implements OnInit, OnDestroy{
     const update = {
       name: this.bug.name
     }
-    this.bugService.updateBug(this.bug._id, update).subscribe(() => {
+    this.bugSubscription = this.bugService.updateBug(this.bug._id, update).subscribe(() => {
       this.bugService.updateBugData();
     });
   }

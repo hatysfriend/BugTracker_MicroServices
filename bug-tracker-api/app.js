@@ -5,6 +5,7 @@ const cors = require('cors');
 const bugRouter = require('./routes/bug-routes');
 const authRouter = require('./routes/auth-routes');
 const tagRouter = require('./routes/tag-routes');
+const workspaceRouter = require('./routes/workspace-routes');
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use(chroma);
 app.use('/auth', authRouter);
 app.use('/bugs', bugRouter);
 app.use('/tags', tagRouter);
+app.use('/workspaces', workspaceRouter);
 
 module.exports = app;

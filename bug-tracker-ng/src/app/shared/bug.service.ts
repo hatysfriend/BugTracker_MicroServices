@@ -1,21 +1,34 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable, combineLatest, BehaviorSubject, of } from 'rxjs';
 import { Bug } from '../models/bug';
 import { HttpClient } from '@angular/common/http';
-import { switchMap, mergeMap } from 'rxjs/operators';
+import { switchMap, mergeMap, tap } from 'rxjs/operators';
+import { WorkspaceStateService } from './workspace-state.service';
 
-@Injectable()
-export class BugService {
+@Injectable({
+  providedIn: 'root'
+})
+export class BugService implements OnInit {
   private BaseUrl = 'http://localhost:3002/bugs';
 
   private updateAction$: BehaviorSubject<any> = new BehaviorSubject(null);
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private workspaceStateService: WorkspaceStateService) { }
+
+  ngOnInit(): void {
+    console.log("Bug Componente");
+  }
 
   bugs$ = combineLatest([
     this.updateAction$.asObservable()
   ]).pipe(
     switchMap(() => {
-      return this.http.get<Bug[]>(`${this.BaseUrl}/getAll`);
+      return this.workspaceStateService.getState()
+        .pipe(
+          tap(() => console.log("How Many Times?")),
+          switchMap((state) => {
+            return this.http.get<Bug[]>(`${this.BaseUrl}/${state}/getAll`);
+          })
+        )
     }),
   );
 
@@ -37,6 +50,7 @@ export class BugService {
   }
 
   updateBugData() {
+    console.log("Refreshing bugs");
     this.updateAction$.next(null);
   }
 }

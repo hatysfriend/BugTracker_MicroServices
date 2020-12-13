@@ -13,6 +13,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiConnectionInterceptor } from './Interceptors/api-connection.interceptor';
 import { UserMessagingService } from './shared/user-messaging.service';
 import { TokenInterceptor } from './Interceptors/token.interceptor';
+import { WorkspaceStateService } from './shared/workspace-state.service';
+import { WorkspaceService } from '../app/workspace/workspace.service';
 
 @NgModule({
   imports: [
@@ -20,12 +22,14 @@ import { TokenInterceptor } from './Interceptors/token.interceptor';
   ],
   providers: [
     AuthMessagingService,
+    WorkspaceService,
     LocalStorageService,
     TokenService,
     UserService,
     BugModalStateService,
     BugService,
     UserMessagingService,
+    WorkspaceStateService,
     { provide: HTTP_INTERCEPTORS, useClass: ApiConnectionInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

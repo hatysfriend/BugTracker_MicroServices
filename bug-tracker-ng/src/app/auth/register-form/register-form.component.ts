@@ -1,30 +1,32 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthMessagingService } from './../auth-messaging.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../shared/auth.service';
 import { User } from '../../models/user';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.scss']
 })
-export class RegisterFormComponent implements OnInit {
+export class RegisterFormComponent implements OnInit, OnDestroy {
   isAnimated: boolean;
-  @Output('message') messageEmitter:EventEmitter<string> = new EventEmitter();
-  @Output('animation') animationEmitter:EventEmitter<boolean> = new EventEmitter();
+  userSub: Subscription;
 
   user = new FormGroup({
     username: new FormControl(),
     password: new FormControl()
   });
 
-  constructor(private authMessagingService: AuthMessagingService, private router: ActivatedRoute, private authService: AuthService, private routerBasic: Router) { }
+  constructor(private authMessagingService: AuthMessagingService, private router: Router, private authService: AuthService, private routerBasic: Router) { }
 
   ngOnInit(): void {
     this.setMessage('');
-    this.isAnimated = this.router.snapshot.queryParams["isAnimated"];
+    this.authMessagingService.getAnimationState().subscribe((anim) => {
+      this.isAnimated = anim;
+    });
   }
 
   handleRegistration() {
@@ -33,7 +35,8 @@ export class RegisterFormComponent implements OnInit {
       password: this.user.value.password
     };
 
-    this.authService.registerUser(userObj).subscribe(() => {
+    this.userSub = this.authService.registerUser(userObj).subscribe(() => {
+        this.authMessagingService.setAnimationState(true);
         this.routerBasic.navigate(['auth/login']);
         this.resetForm();
       },
@@ -56,6 +59,13 @@ export class RegisterFormComponent implements OnInit {
   };
 
   emitAnimationData() {
-    this.authMessagingService.setAnimationState(this.isAnimated);
+    this.authMessagingService.setAnimationState(false);
+    this.router.navigate(['/auth/login']);
   };
+
+  ngOnDestroy(): void {
+    if (this.userSub) {
+      this.userSub.unsubscribe();
+    }
+  }
 }

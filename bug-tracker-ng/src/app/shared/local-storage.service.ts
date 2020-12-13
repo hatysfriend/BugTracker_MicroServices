@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 export class LocalStorageService {
   private AccessTokenKey = "accessToken";
   private RefreshTokenKey = "refreshToken";
+  private WorkspaceKey = "workspaceState";
 
   accessToken:string;
   refreshToken:string;
@@ -23,6 +24,14 @@ export class LocalStorageService {
 
   getRefreshToken(): string {
     return localStorage.getItem(this.RefreshTokenKey);
+  }
+
+  setWorkspaceState(workspaceId: string): void {
+    localStorage.setItem(this.WorkspaceKey, workspaceId);
+  }
+
+  getWorkspaceState(): string {
+    return localStorage.getItem(this.WorkspaceKey);
   }
 
   deleteTokens(): void {

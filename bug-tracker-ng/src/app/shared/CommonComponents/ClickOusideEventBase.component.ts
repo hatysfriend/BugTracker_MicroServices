@@ -3,8 +3,7 @@ import { fromEvent, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-base-component',
-  template: '',
-  changeDetection: ChangeDetectionStrategy.OnPush  
+  template: ''
 })
 
 export class BaseClickDetectorComponent implements OnInit, OnDestroy {
@@ -25,10 +24,10 @@ export class BaseClickDetectorComponent implements OnInit, OnDestroy {
     this.clickEventSubscriber$ = fromEvent(document, 'click').subscribe((event) => {
       if (!this._eref.nativeElement.contains(event.target)) {
         this.isActive = false;
-        console.log("Click Outside Element!");
+        console.log("Click Outside Element Tag Entry!");
       }
       else {
-        console.log("Click Inside Element!");
+        console.log("Click Inside Element! Tag Entry");
       }
     })
   }
