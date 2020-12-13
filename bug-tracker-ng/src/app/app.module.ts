@@ -9,19 +9,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from './core.module';
+import { ErrorComponent } from '../app/shared/error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoadingComponent,
-    UserMessagingComponent
+    UserMessagingComponent,
+    ErrorComponent
   ],
   imports: [
     CoreModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
   bootstrap: [AppComponent]
 })

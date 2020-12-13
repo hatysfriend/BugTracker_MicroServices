@@ -24,7 +24,8 @@ describe('BugTitleComponent', () => {
     const bug: Bug = {
       name: 'test',
       author: 'test',
-      status: 'test'
+      status: 'test',
+      workspace: 'test'
     };
     fixture = TestBed.createComponent(BugTitleComponent);
     component = fixture.componentInstance;

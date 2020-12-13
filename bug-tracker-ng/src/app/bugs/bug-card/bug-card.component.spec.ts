@@ -12,7 +12,7 @@ describe('BugCardComponent', () => {
   let mockModalStateService: jasmine.SpyObj<BugModalStateService>;
 
   beforeEach(async () => {
-    mockModalStateService = jasmine.createSpyObj<BugModalStateService>(['openModal']);
+    mockModalStateService = jasmine.createSpyObj<BugModalStateService>(['openModal', 'closeModal', 'getModalState', 'setBugEditState', 'getBugEditState']);
 
     await TestBed.configureTestingModule({
       imports: [ RouterTestingModule.withRoutes([]) ],
@@ -28,7 +28,8 @@ describe('BugCardComponent', () => {
       name: 'test',
       status: 'test',
       author: 'test',
-      comments: []
+      comments: [],
+      workspace: 'test'
     };
     fixture = TestBed.createComponent(BugCardComponent);
     component = fixture.componentInstance;

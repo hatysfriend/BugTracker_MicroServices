@@ -4,7 +4,7 @@ import { AuthMessagingService } from './../auth-messaging.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../shared/auth.service';
 import { User } from '../../models/user';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register-form',
@@ -12,8 +12,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent implements OnInit, OnDestroy {
-  isAnimated: boolean;
-  userSub: Subscription;
+  isAnimated$: Observable<boolean>
+  subscriptions: Subscription[] = [];
 
   user = new FormGroup({
     username: new FormControl(),
@@ -24,9 +24,7 @@ export class RegisterFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.setMessage('');
-    this.authMessagingService.getAnimationState().subscribe((anim) => {
-      this.isAnimated = anim;
-    });
+    this.isAnimated$ = this.authMessagingService.getAnimationState();
   }
 
   handleRegistration() {
@@ -35,14 +33,16 @@ export class RegisterFormComponent implements OnInit, OnDestroy {
       password: this.user.value.password
     };
 
-    this.userSub = this.authService.registerUser(userObj).subscribe(() => {
+    this.subscriptions.push(
+      this.authService.registerUser(userObj).subscribe(() => {
         this.authMessagingService.setAnimationState(true);
         this.routerBasic.navigate(['auth/login']);
         this.resetForm();
       },
-      (err) => {
-        this.setMessage('Sorry, this username is already taken!');
-      }
+        () => {
+          this.setMessage('Sorry, this username is already taken!');
+        }
+      )
     );
   }
 
@@ -64,8 +64,10 @@ export class RegisterFormComponent implements OnInit, OnDestroy {
   };
 
   ngOnDestroy(): void {
-    if (this.userSub) {
-      this.userSub.unsubscribe();
-    }
+    this.subscriptions.forEach(sub => {
+      if (sub) {
+        sub.unsubscribe();
+      }
+    });
   }
 }

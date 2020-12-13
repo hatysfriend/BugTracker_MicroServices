@@ -24,7 +24,8 @@ describe('BugDescComponent', () => {
       name: 'test',
       author: 'test',
       status: 'test',
-      description: 'test'
+      description: 'test',
+      workspace: 'test'
     };
     fixture = TestBed.createComponent(BugDescComponent);
     component = fixture.componentInstance;

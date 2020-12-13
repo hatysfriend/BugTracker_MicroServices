@@ -4,6 +4,7 @@ import { Bug } from '../models/bug';
 import { HttpClient } from '@angular/common/http';
 import { switchMap, mergeMap, tap } from 'rxjs/operators';
 import { WorkspaceStateService } from './workspace-state.service';
+import { Workspace } from './../models/workspace';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class BugService implements OnInit {
     switchMap(() => {
       return this.workspaceStateService.getState()
         .pipe(
-          switchMap((state) => {
-            return this.http.get<Bug[]>(`${this.BaseUrl}/${state}/getAll`);
+          switchMap((state: Workspace) => {
+            return this.http.get<Bug[]>(`${this.BaseUrl}/${state._id}/getAll`);
           })
         )
     }),

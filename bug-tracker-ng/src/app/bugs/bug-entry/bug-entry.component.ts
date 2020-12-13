@@ -45,7 +45,7 @@ export class BugEntryComponent implements OnDestroy {
                   name: this.title,
                   author: user.id,
                   description: "Enter a description here...",
-                  workspace: state
+                  workspace: state._id
                 }
 
                 this.cancelEntry();

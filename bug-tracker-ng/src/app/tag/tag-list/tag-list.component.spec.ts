@@ -27,7 +27,8 @@ describe('TagListComponent', () => {
       name: 'test',
       status: 'test',
       author: 'author',
-      tags: [{ name: 'test', colour: 'red' }]
+      tags: [{ name: 'test', colour: 'red' }],
+      workspace: 'test'
     };
 
     fixture = TestBed.createComponent(TagListComponent);

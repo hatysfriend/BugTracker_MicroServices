@@ -19,7 +19,7 @@ describe('BugModalComponent', () => {
 
   beforeEach(async () => {
     mockBugService = jasmine.createSpyObj(['getBugById', 'updateBug','addBug', 'updateBugData']);
-    mockModalService = jasmine.createSpyObj(['getModalState', 'openModal', 'closeModal']);
+    mockModalService = jasmine.createSpyObj<BugModalStateService>(['getModalState', 'openModal', 'closeModal', 'setBugEditState', 'getBugEditState']);
     mockUserService = jasmine.createSpyObj(['getUser']);
 
     await TestBed.configureTestingModule({
@@ -40,6 +40,7 @@ describe('BugModalComponent', () => {
     fixture = TestBed.createComponent(BugModalComponent);
     component = fixture.componentInstance;
     history.pushState('test', 'bugId');
+    mockModalService.getBugEditState.and.returnValue(of('testId'));
     fixture.detectChanges();
   });
 
@@ -65,7 +66,8 @@ describe('BugModalComponent', () => {
       name: 'test',
       status: 'Created',
       author: 'test',
-      comments: []
+      comments: [],
+      workspace: 'test'
     };
     fixture.detectChanges();
     const jsonResult = component.setBugColour(bug);
@@ -78,7 +80,8 @@ describe('BugModalComponent', () => {
       name: 'test',
       status: 'test',
       author: 'test',
-      comments: []
+      comments: [],
+      workspace: 'test'
     };
     mockBugService.getBugById.and.returnValue(of(bug));
 

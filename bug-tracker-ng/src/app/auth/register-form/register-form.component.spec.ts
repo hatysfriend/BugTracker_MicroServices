@@ -14,7 +14,7 @@ describe('RegisterFormComponent', () => {
   let router: Router;
 
   beforeEach(async () => {
-    mockAuthMessagingService = jasmine.createSpyObj<AuthMessagingService>(["isAnimation", "getAnimationState", "setAnimationState", "getMessage", "setMessage"], ['isAnimation', "message$"]);
+    mockAuthMessagingService = jasmine.createSpyObj<AuthMessagingService>(["getAnimationState", "setAnimationState", "getMessage", "setMessage"], ['isAnimation$', "message$"]);
 
     mockAuthService = jasmine.createSpyObj<AuthService>(["loginUser", "logoutUser", "registerUser"]);
 

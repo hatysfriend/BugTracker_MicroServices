@@ -18,17 +18,20 @@ describe('BugComponent', () => {
       {
         name: 'Created',
         status: 'Created',
-        author: 'Created'
+        author: 'Created',
+        workspace: 'test'
       },
       {
         name: 'Fixed',
         status: 'Fixed',
-        author: 'Fixed'
+        author: 'Fixed',
+        workspace: 'test'
       },
       {
         name: 'In-Progress',
         status: 'In-Progress',
-        author: 'In-Progress'
+        author: 'In-Progress',
+        workspace: 'test'
       },
     ]
 

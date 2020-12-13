@@ -9,23 +9,23 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class WorkspaceStateService {
-  private stateSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  private stateSubject: BehaviorSubject<Workspace> = new BehaviorSubject<Workspace>(null);
 
   constructor(private localStorageService: LocalStorageService, private router: Router) { }
 
   setState(workspace: Workspace): void {
-    this.localStorageService.setWorkspaceState(workspace._id);
-    this.stateSubject.next(workspace._id);
+    this.localStorageService.setWorkspaceState(JSON.stringify(workspace));
+    this.stateSubject.next(workspace);
   }
 
-  getState(): Observable<string> {
+  getState(): Observable<Workspace> {
     return this.stateSubject.pipe(
       switchMap((state) => {
         if (state) {
           return this.stateSubject;
         }
 
-        const localState = this.localStorageService.getWorkspaceState();
+        const localState = JSON.parse(this.localStorageService.getWorkspaceState());
         if (localState) {
           return of(localState);
         }

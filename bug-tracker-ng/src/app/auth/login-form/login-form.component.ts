@@ -5,7 +5,7 @@ import { User } from 'src/app/models/user';
 import { AuthMessagingService } from './../auth-messaging.service';
 import { AuthService } from '../../shared/auth.service';
 import { UserMessagingService } from './../../shared/user-messaging.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login-form',
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 })
 
 export class LoginFormComponent implements OnInit, OnDestroy {
-  isAnimated: boolean;
+  isAnimated$: Observable<boolean>;
   loginSubscription: Subscription;
 
   user = new FormGroup({
@@ -30,9 +30,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.setMessage('');
-    this.authMessagingService.getAnimationState().subscribe((anim) => {
-      this.isAnimated = anim;
-    });
+    this.isAnimated$ = this.authMessagingService.getAnimationState();
   }
 
   handleLogin() {

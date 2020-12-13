@@ -2,6 +2,12 @@
   background: #383838
 }
 
+.logo {
+  margin-right: 30px;
+  border-right: 5px solid white;
+  border-radius: 5px;
+}
+
 .navbar-item {
   padding: 0px;
   max-height: 300;
@@ -9,4 +15,9 @@
 
 .navbar-item img {
   max-height: 100%;
+}
+
+.workspace {
+  font-weight: bold;
+  font-size: larger;
 }
