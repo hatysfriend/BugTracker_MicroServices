@@ -1,5 +1,6 @@
 const express = require('express');
 const authController = require('../controllers/authController');
+const authenticator = require('../authentication/authenticator');
 
 const router = express.Router();
 
@@ -124,5 +125,7 @@ router.post('/token', authController.refresh_token_post);
  */
 // #endregion
 router.post('/logout', authController.invalidate_token_delete);
+
+router.get('/search/:username', authenticator.authenticateToken, authController.get_user_by_username);
 
 module.exports = router;

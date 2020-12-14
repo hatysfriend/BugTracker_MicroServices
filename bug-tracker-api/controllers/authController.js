@@ -3,6 +3,7 @@ const repo = require('../data/authRepository');
 const authHelper = require('../authentication/authHelper');
 const authenticator = require('../authentication/authenticator');
 const tokenRepo = require('../data/tokenRepository');
+const authRepository = require('../data/authRepository');
 
 require('dotenv').config();
 
@@ -88,5 +89,17 @@ module.exports = {
   invalidate_token_delete: (req, res) => {
     tokenRepo.DeleteToken(req.body.token);
     res.sendStatus(204);
+  },
+
+  get_user_by_username: (req, res) => {
+    authRepository
+      .GetUserByUsername(req.params.username)
+      .then((users) => {
+        console.log(JSON.stringify(users));
+        res.status(200).send(users);
+      })
+      .catch((err) => {
+        res.status(500).send({ error: err });
+      });
   }
 };

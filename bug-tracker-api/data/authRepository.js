@@ -19,7 +19,14 @@ module.exports = (() => {
     return userModel.save();
   }
 
+  async function _getUserByUsername(username) {
+    return authSchema.userModel.find({ username: RegExp(`^${username}`, 'i') });
+  }
+
   return {
+    GetUserByUsername(username) {
+      return _getUserByUsername(username);
+    },
     GetUser(userQuery) {
       return _getUser(userQuery);
     },
