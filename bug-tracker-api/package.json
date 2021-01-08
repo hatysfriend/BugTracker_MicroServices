@@ -4,7 +4,7 @@
   "description": "Bug Tracker",
   "main": "app.js",
   "scripts": {
-    "test": "set CONNECTION=mongodb://localhost:27017/testDB&& mocha test --exit",
+    "test": "",
     "start": "nodemon server.js",
     "old": "docker-compose up -d && set CONNECTION=mongodb://localhost:30000/bugDB&& nodemon server.js"
   },

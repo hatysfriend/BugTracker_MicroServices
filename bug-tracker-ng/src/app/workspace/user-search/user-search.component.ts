@@ -26,7 +26,6 @@ export class UserSearchComponent implements OnInit {
       mergeMap((value) => {
         const filteredVal = value.replace(/[^0-9a-z]/gi, '');
         if (filteredVal && filteredVal.trim().length !== 0) {
-          
           return this.http.get<User[]>(`http://localhost:3002/auth/search/${value}`)
         }
         return of([]);
